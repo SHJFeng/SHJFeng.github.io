@@ -10,4 +10,4 @@ redirect_from:
 
 
 
-I'm a student learning mathematics. Currently, I'm visiting [West Lake University](https://science.westlake.edu.cn/en/About/areasofstudy/Overview_2/). My research interest is Algebraic Geometry. I have obtained my Bachelor degree from [Southwest University](http://math.swu.edu.cn/) in 2024.
+A
