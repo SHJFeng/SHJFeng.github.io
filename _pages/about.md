@@ -1,6 +1,5 @@
 ---
 permalink: /
-title: "Welcome to Shijie Feng's Page"
 author_profile: true
 redirect_from: 
   - /about/
