@@ -34,7 +34,7 @@ Experience
 * Feb. 2024—Jun. 2024: Teaching Assistant
   * Homework correcting and teaching in the exercise classes for the first year algebra course
   
-About Math:
+About Math
 ======
 * Sep. 2021—Dec. 2021: Homological Algebra Seminar
   * Followed Hilton& Stammbach’s Book A Course in Homological Algebra
@@ -47,6 +47,6 @@ About Math:
 
 COMPETITIONS & AWARDS
 ======
-* China National Scholarship; Second scholarship; Third scholarship
-* 13th the Chinese Mathematics Competition (2021): the First Prize in Chongqing
+* China National Scholarship, Second scholarship, Third scholarship
+* 13th the Chinese Mathematics Competition (2021):the First Prize in Chongqing
 
