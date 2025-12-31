@@ -118,3 +118,42 @@ a {
 a:hover {
     color: #ffffff !important;
 }
+/* --- 侧边栏职业化改造 --- */
+
+/* 1. 去掉侧边栏的白色背景和阴影 */
+.sidebar {
+    background: transparent !important;
+    opacity: 1 !important; /* 保证侧边栏一直清晰，不随中间内容变暗 */
+    border: none !important;
+}
+
+/* 2. 头像样式优化 */
+.author__avatar img {
+    border-radius: 10px !important; /* 稍微圆角，不要全圆 */
+    border: 2px solid rgba(255,255,255,0.8); /* 加个细白边框显精致 */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5); /* 头像立体感 */
+}
+
+/* 3. 侧边栏文字对齐和大小 */
+.sidebar .author__name {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-top: 10px;
+    text-shadow: 0 2px 4px black; /* 名字加重阴影 */
+}
+.sidebar .author__bio {
+    font-size: 1em;
+    margin-bottom: 20px;
+    color: #e0e0e0 !important; /* 简介稍微灰一点，拉开层次 */
+}
+
+/* 4. 侧边栏链接列表 (Email, Github等) */
+.author__urls-wrapper {
+    background: rgba(0, 0, 0, 0.3) !important; /* 给链接区加个极淡的黑底 */
+    padding: 10px;
+    border-radius: 8px;
+}
+.author__urls li a {
+    color: #ffffff !important;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
