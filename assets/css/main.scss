@@ -101,3 +101,20 @@ body {
     color: #f2f2f2 !important;
     text-decoration: underline;
 }
+/* --- 全局文字颜色调整 --- */
+body, h1, h2, h3, h4, h5, h6, p, li, a, .sidebar {
+    color: #ffffff !important; /* 强制变白 */
+}
+
+/* 给文字加一层淡淡的阴影，确保在任何背景图上都看清 */
+body {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* 链接颜色也改为白色或亮色 */
+a {
+    color: #87ceeb !important; /* 天蓝色链接，比较显眼 */
+}
+a:hover {
+    color: #ffffff !important;
+}
