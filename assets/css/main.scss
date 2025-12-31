@@ -1,15 +1,11 @@
+---
+---
 /*
  * This file controls what is imported from /_sass
  *
  * Note that the files are processed in the order they are imported, so they are partly
    sorted by the dependencies. Also, the first two lines of the file are required by Jekyll.
  */
----
-# Only the main Sass file needs front matter (the dashes are important)
----
-
-@charset "utf-8";
-
 /* ==========================================================================
    1. 核心模块引入 (不要动这部分，否则样式会崩)
    ========================================================================== */
@@ -38,116 +34,111 @@
 @import "vendor/magnific-popup/magnific-popup";
 
 /* ==========================================================================
-   2. SHIJIE FENG - PARALLAX FIXED (基于您的要求)
+   SHIJIE FENG - FIXED VERSION (恢复渐变 + 去除白条)
    ========================================================================== */
 
-/* --- A. 全局背景：视差滚动的核心 --- */
+/* --- 1. 全局基础设置 --- */
 body {
-    background-image: url('/images/background.jpg'); /* 背景图 */
+    background-image: url('/images/background.jpg'); /* 确保路径对 */
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* 关键：固定背景，实现视差 */
+    background-attachment: fixed;
     background-repeat: no-repeat;
-    /* 全局强制白字 */
+    /* 全局文字白色 */
     color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8); /* 稍微减弱阴影，防止Sitemap模糊 */
 }
 
-/* 强力清除默认容器的白色背景，否则会挡住图片 */
-.page, .page__content, .archive, .author__urls-wrapper, .page__footer {
+/* 让所有默认容器透明，不挡背景 */
+.page, .page__content, .archive, .author__urls-wrapper {
     background-color: transparent !important;
-    background: transparent !important;
     box-shadow: none !important;
-    border: none !important;
 }
 
-/* --- B. 顶部导航栏 (浅灰色玻璃 + 白字) --- */
-.masthead, .masthead__inner-wrap {
-    /* 浅灰色半透明 (White Glass) */
-    background-color: rgba(255, 255, 255, 0.15) !important; 
-    backdrop-filter: blur(10px); /* 毛玻璃模糊 */
+/* --- 2. 核心：恢复 JS 渐变控制 (关键修改) --- */
+/* 这里千万不要加 background-color !important，否则 JS 就废了 */
+#main-content-wrapper {
+    /* 默认透明，等着 JS 来给它上色 */
+    background-color: rgba(0, 0, 0, 0); 
+    padding: 2em;
+    border-radius: 8px;
+    transition: background-color 0.1s ease-out; 
+    min-height: 100vh;
+}
+
+/* --- 3. 顶部导航栏 (Masthead) 强力去白 --- */
+/* 必须同时穿透外层 (.masthead) 和内层 (.masthead__inner-wrap) */
+.masthead, 
+.masthead__inner-wrap {
+    background-color: rgba(255, 255, 255, 0.1) !important; /* 10%透明度的微白 */
+    background: rgba(255, 255, 255, 0.1) !important;       /* 双重保险 */
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: blur(10px); /* 毛玻璃 */
     -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
 }
 
 .masthead {
     position: sticky;
     top: 0;
     z-index: 999;
+    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
 }
 
-/* 导航栏文字：白色 */
+/* 导航栏文字 */
 .masthead__menu-item a {
     color: #ffffff !important;
     font-weight: 700;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.5); /* 加点阴影防止背景太亮看不清 */
 }
-
-/* 悬停效果：发光 */
 .masthead__menu-item a:hover {
-    color: #ffffff !important;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 1);
-    text-decoration: none !important;
-    background: transparent !important;
+    color: #87ceeb !important;
 }
 
-/* --- C. 中间内容区 (渐变主体) --- */
-/* 这里我们只设初始透明，颜色变化交给 JS */
-#main-content-wrapper {
-    background-color: rgba(0, 0, 0, 0); /* 初始完全透明 */
-    transition: background-color 0.1s ease-out; /* 丝滑过渡 */
-    padding: 30px;
-    border-radius: 8px;
-    min-height: 100vh;
-}
-
-/* =========================================
-   D. Sidebar 位置终极修正 (Padding 法) - 您指定的代码
-   ========================================= */
-
-/* 1. 强行给侧边栏内容区上方加 120px 的隐形填充 */
-/* 这会把 "Shijie Feng" 这个名字直接往下挤，避开导航栏 */
-.sidebar__content {
-    padding-top: 140px !important; /* 我稍微改大了一点点(140)以防万一，您可以改回120 */
-    position: relative; /* 确保定位参照正确 */
-}
-
-/* 2. 确保侧边栏本身不带背景色，且层级正确 */
-.sidebar {
-    background-color: transparent !important;
-    border: none !important;
-    z-index: 10; /* 必须比 Masthead (999) 小 */
-    margin-top: 0 !important; /* 防止其他的 margin 干扰 */
-}
-
-/* 3. 再次确保名字的样式 */
-.author__name {
-    margin-top: 20px !important; /* 给名字再多加点额外的呼吸空间 */
-    color: #fff !important;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.9);
-    font-size: 1.8em !important;
-}
-
-/* 头像加个框，好看点 */
-.author__avatar img {
-    border: 2px solid rgba(255,255,255,0.7);
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-}
-
-/* --- E. 底部文字 --- */
+/* --- 4. 底部 Footer 强力去白 --- */
+.page__footer, 
+.page__footer footer, 
 .page__footer-copyright {
-    color: rgba(255, 255, 255, 0.7) !important;
+    background-color: transparent !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+.page__footer-copyright {
+    color: rgba(255, 255, 255, 0.5) !important;
+    text-shadow: none !important; /* 去掉底部的阴影防止模糊 */
 }
 
-/* --- F. 通用链接 --- */
+/* --- 5. 侧边栏与文字修复 --- */
+.sidebar__content {
+    padding-top: 140px !important; /* 避开导航栏 */
+    position: relative;
+}
+.sidebar {
+    background: transparent !important;
+    border: none !important;
+    z-index: 10;
+}
+
+/* 名字和头像 */
+.author__name {
+    color: #fff !important;
+    text-shadow: 0 2px 5px rgba(0,0,0,1);
+    font-size: 1.8em !important;
+    margin-top: 10px !important;
+}
+.author__avatar img {
+    border-radius: 10px !important;
+    border: 2px solid rgba(255,255,255,0.6);
+}
+
+/* 通用文字颜色修正 */
+h1, h2, h3, h4, h5, h6, p, li {
+    color: #ffffff !important;
+}
 a {
-    color: #87ceeb !important; /* 正文里的链接保持天蓝色 */
+    color: #87ceeb !important;
+    text-decoration: none;
 }
 a:hover {
-    color: #ffffff !important;
-}
-/* 必须再次强制覆盖导航栏，防止被上面影响 */
-.masthead__menu-item a {
     color: #ffffff !important;
 }
