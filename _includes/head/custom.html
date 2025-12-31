@@ -11,3 +11,36 @@
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <!-- end custom head snippets -->
+<style>
+  /* 1. 针对导航栏外层和内层容器：设置半透明 + 毛玻璃 */
+  .masthead, 
+  .masthead__inner-wrap {
+    /* 背景色：白色，透明度 0.2 (20%) */
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    
+    /* 核心：毛玻璃模糊滤镜 */
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important; /* 兼容 Safari */
+    
+    /* 边框：极淡的半透明白线 */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    
+    /* 去除阴影，让它看起来更轻薄 */
+    box-shadow: none !important;
+  }
+
+  /* 2. 确保文字颜色是白色，并加一点阴影防背景干扰 */
+  .masthead__menu-item a {
+      color: #ffffff !important; 
+      text-shadow: 0 1px 3px rgba(0,0,0,0.5); 
+  }
+  
+  /* 3. 去掉鼠标悬停时的蓝色背景，改为文字发光 */
+  .masthead__menu-item a:hover {
+      background: transparent !important;
+      color: #ffffff !important;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 1);
+      text-decoration: none !important;
+  }
+</style>
