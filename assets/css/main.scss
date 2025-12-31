@@ -7,10 +7,14 @@
  * Note that the files are processed in the order they are imported, so they are partly
    sorted by the dependencies. Also, the first two lines of the file are required by Jekyll.
  */
+---
+# Only the main Sass file needs front matter
+---
+
 @charset "utf-8";
 
 /* ==========================================================================
-   1. 必须保留的引用 (DO NOT DELETE)
+   1. 基础模块引入 (保持原样，不要动)
    ========================================================================== */
 @import "vendor/breakpoint/breakpoint";
 @import "themes";
@@ -37,80 +41,71 @@
 @import "vendor/magnific-popup/magnific-popup";
 
 /* ==========================================================================
-   2. SHIJIE FENG - FINAL LOGIC FIX (逻辑修复版)
+   2. SHIJIE FENG - PARALLAX THEME SETUP (视差滚动修正版)
    ========================================================================== */
 
-/* --- A. 全局去白 (强力清洗) --- */
-/* 把所有可能带有白色背景的容器全部设为透明 */
-body, .page, .page__content, .archive, .author__urls-wrapper, .page__footer {
+/* --- A. 核心：让背景图显现 --- */
+/* 1. 把背景图放在 body 上，并固定住 (Fixed) 实现视差感 */
+body {
+    background-image: url('/images/background.jpg');
+    background-size: cover;      /* 铺满全屏 */
+    background-position: center; /* 居中显示 */
+    background-attachment: fixed;/* 关键：背景固定，内容滚动 */
+    background-repeat: no-repeat;
+    background-color: #000;      /* 图片加载前的底色 */
+    color: #ffffff !important;   /* 全局强制白字 */
+}
+
+/* 2. 【关键】把所有挡在图片前面的容器背景全部掏空 (变透明) */
+html, .page, .page__content, .archive, .author__urls-wrapper {
     background-color: transparent !important;
     background: transparent !important;
     box-shadow: none !important;
 }
 
-/* 全局背景图 */
-body {
-    background-image: url('/images/background.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    color: #ffffff !important; /* 全局白字 */
-}
-
-/* --- B. 核心：JS 渐变区域 (千万别加 !important) --- */
-/* 这是 JS 要控制的 ID，我们只给它一个初始值 */
+/* --- B. 内容容器 (Parallax Fade-in 主体) --- */
+/* 这里我们不设背景色，只设 padding，背景色交给 JS 动态添加 */
 #main-content-wrapper {
-    background-color: rgba(0, 0, 0, 0); /* 初始完全透明 */
-    transition: background-color 0.1s ease-out; /* 让 JS 变化丝滑 */
-    padding: 20px;
-    border-radius: 8px;
-    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0); /* 初始状态：完全透明 */
+    transition: background-color 0.2s ease-out; /* 让颜色变化丝滑 */
+    padding: 40px;      /* 给文字留出呼吸空间 */
+    border-radius: 8px; /* 圆角看起来更现代 */
+    min-height: 100vh;  /* 保证至少占满一屏 */
+    margin-top: 20px;
 }
 
-/* --- C. 顶部导航栏 (Masthead) --- */
-/* 导航栏需要一点点背景色来衬托文字，但不能是实心白 */
+/* --- C. 顶部导航栏 (浅灰背景 + 白字) --- */
 .masthead, .masthead__inner-wrap {
-    background-color: rgba(255, 255, 255, 0.05) !important; /* 5% 的极淡白色 */
-    backdrop-filter: blur(8px); /* 毛玻璃 */
-    -webkit-backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-    box-shadow: none !important;
+    /* 您要求的“浅灰色背景”，这里用半透明的深灰，否则白字看不清 */
+    /* 如果一定要浅灰(light gray)，字就得变黑。为了白字，这里用半透明黑灰 */
+    background-color: rgba(60, 60, 60, 0.7) !important; 
+    backdrop-filter: blur(10px); /* 毛玻璃效果 */
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2) !important;
 }
 
 .masthead {
     position: sticky;
     top: 0;
-    z-index: 999;
+    z-index: 999; /* 保证在最上层 */
 }
 
-/* --- D. 导航栏文字与悬停 (解决蓝色问题) --- */
-/* 1. 默认状态：纯白 */
+/* 导航栏文字 */
 .masthead__menu-item a {
-    color: #ffffff !important;
+    color: #ffffff !important; /* 纯白文字 */
     font-weight: 700;
 }
-
-/* 2. 悬停状态：纯白 + 发光 (覆盖默认的蓝色) */
 .masthead__menu-item a:hover {
-    color: #ffffff !important; 
-    text-shadow: 0 0 8px rgba(255, 255, 255, 1); /* 发光效果 */
+    color: #ffffff !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.9); /* 悬停发光 */
     text-decoration: none !important;
-    background: transparent !important; /* 防止悬停出现背景块 */
 }
 
-/* --- E. 底部 Footer --- */
-.page__footer, .page__footer footer {
-    background-color: transparent !important;
-    border: none !important;
-}
-.page__footer-copyright {
-    color: rgba(255, 255, 255, 0.5) !important;
-}
-
-/* --- F. 侧边栏 (Sidebar) 修复 --- */
+/* --- D. 侧边栏修复 (防止遮挡) --- */
 .sidebar__content {
-    padding-top: 140px !important; /* 把内容挤下来 */
+    /* 增加顶部距离，防止被导航栏盖住 */
+    padding-top: 120px !important; 
     position: relative;
 }
 .sidebar {
@@ -118,22 +113,34 @@ body {
     border: none !important;
     z-index: 10;
 }
+
+/* 侧边栏名字和头像美化 */
 .author__name {
     color: #fff !important;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8); /* 加阴影防背景干扰 */
     font-size: 1.8em !important;
+    font-weight: bold;
+}
+.author__avatar img {
+    border: 3px solid rgba(255,255,255,0.5); /* 半透明白边框 */
+    border-radius: 50%; /* 圆形头像 */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
 
-/* --- G. 通用链接 --- */
-/* 正文里的链接用天蓝色，方便识别 */
+/* --- E. 底部 Footer (透明) --- */
+.page__footer {
+    background: transparent !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    margin-top: 50px;
+}
+
+/* --- F. 链接颜色统一 --- */
 a {
-    color: #87ceeb !important;
+    color: #87ceeb !important; /* 正文链接淡蓝色 */
+    text-decoration: none;
 }
 a:hover {
     color: #ffffff !important;
-    text-decoration: none;
 }
-/* 再次确保导航栏链接不受影响 */
-.masthead__menu-item a {
-    color: #ffffff !important;
-}
+/* 必须再次覆盖导航栏，防止冲突 */
+.masthead__menu-item a { color: #ffffff !important; }
