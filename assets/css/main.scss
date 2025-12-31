@@ -40,3 +40,39 @@
     "vendor/font-awesome/brands",
     "vendor/magnific-popup/magnific-popup"
 ;
+/* --- 自定义背景设置 Start --- */
+
+/* 1. 设置全屏固定背景图 */
+body {
+    background-image: url('/images/background.jpg'); /* 确保路径对应你的图片 */
+    background-size: cover;       /* 图片铺满全屏 */
+    background-position: center;  /* 图片居中 */
+    background-attachment: fixed; /* 关键：图片固定，不随滚动条移动 */
+    background-repeat: no-repeat;
+}
+
+/* 2. 让网页默认的容器背景变透明，否则会挡住图片 */
+.page, .page__content, .archive, .author__urls-wrapper {
+    background-color: transparent !important; 
+    box-shadow: none !important;
+}
+
+/* 3. 定义我们想要变色的主容器 */
+/* 注意：academicpages 的主内容框通常是 .page__inner-wrap 或者 #main */
+#main-content-wrapper {
+    /* 初始状态：完全透明或者半透明 */
+    background-color: rgba(255, 255, 255, 0); 
+    padding: 2em; /* 加点内边距，好看一点 */
+    border-radius: 8px; /* 圆角 */
+    transition: background-color 0.1s ease-out; /* 让变化丝滑一点 */
+    min-height: 100vh;
+}
+
+/* 修复侧边栏如果不透明的问题 */
+.sidebar {
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+/* --- 自定义背景设置 End --- */
