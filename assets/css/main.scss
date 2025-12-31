@@ -7,11 +7,10 @@
  * Note that the files are processed in the order they are imported, so they are partly
    sorted by the dependencies. Also, the first two lines of the file are required by Jekyll.
  */
-
 @charset "utf-8";
 
 /* ==========================================================================
-   1. JEKYLL & THEME IMPORTS (不要动这部分，保持原样)
+   1. 必须保留的引用 (DO NOT DELETE)
    ========================================================================== */
 @import "vendor/breakpoint/breakpoint";
 @import "themes";
@@ -38,26 +37,44 @@
 @import "vendor/magnific-popup/magnific-popup";
 
 /* ==========================================================================
-   2. SHIJIE FENG - CUSTOM OVERRIDES (你的自定义样式)
+   2. SHIJIE FENG - FINAL LOGIC FIX (逻辑修复版)
    ========================================================================== */
 
-/* --- 全局背景与文字 --- */
+/* --- A. 全局去白 (强力清洗) --- */
+/* 把所有可能带有白色背景的容器全部设为透明 */
+body, .page, .page__content, .archive, .author__urls-wrapper, .page__footer {
+    background-color: transparent !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* 全局背景图 */
 body {
     background-image: url('/images/background.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
-    /* 强制全局白字 */
-    color: #ffffff !important;
+    color: #ffffff !important; /* 全局白字 */
 }
 
-/* --- 顶部导航栏 (Masthead) 深度透明化 --- */
+/* --- B. 核心：JS 渐变区域 (千万别加 !important) --- */
+/* 这是 JS 要控制的 ID，我们只给它一个初始值 */
+#main-content-wrapper {
+    background-color: rgba(0, 0, 0, 0); /* 初始完全透明 */
+    transition: background-color 0.1s ease-out; /* 让 JS 变化丝滑 */
+    padding: 20px;
+    border-radius: 8px;
+    min-height: 100vh;
+}
+
+/* --- C. 顶部导航栏 (Masthead) --- */
+/* 导航栏需要一点点背景色来衬托文字，但不能是实心白 */
 .masthead, .masthead__inner-wrap {
-    background-color: rgba(255, 255, 255, 0.1) !important; /* 只有10%的白 */
-    backdrop-filter: blur(10px); /* 毛玻璃 */
-    -webkit-backdrop-filter: blur(10px);
-    border: none !important;
+    background-color: rgba(255, 255, 255, 0.05) !important; /* 5% 的极淡白色 */
+    backdrop-filter: blur(8px); /* 毛玻璃 */
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
     box-shadow: none !important;
 }
 
@@ -65,78 +82,58 @@ body {
     position: sticky;
     top: 0;
     z-index: 999;
-    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
 }
 
-/* --- 导航栏文字颜色 (解决蓝色悬停问题) --- */
-/* 默认状态：白字 */
+/* --- D. 导航栏文字与悬停 (解决蓝色问题) --- */
+/* 1. 默认状态：纯白 */
 .masthead__menu-item a {
     color: #ffffff !important;
     font-weight: 700;
 }
 
-/* 悬停状态：改为白色发光 (不再是天蓝色 #87ceeb) */
+/* 2. 悬停状态：纯白 + 发光 (覆盖默认的蓝色) */
 .masthead__menu-item a:hover {
-    color: #ffffff !important;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+    color: #ffffff !important; 
+    text-shadow: 0 0 8px rgba(255, 255, 255, 1); /* 发光效果 */
     text-decoration: none !important;
+    background: transparent !important; /* 防止悬停出现背景块 */
 }
 
-/* --- 侧边栏 (Sidebar) 修复 --- */
-/* 把内容往下挤，避开导航栏 */
-.sidebar__content {
-    padding-top: 140px !important; 
-    position: relative;
-}
-/* 去掉侧边栏背景 */
-.sidebar {
-    background: transparent !important;
-    border: none !important;
-    z-index: 10;
-}
-/* 名字样式 */
-.author__name {
-    color: #fff !important;
-    font-size: 1.8em !important;
-    text-shadow: 0 2px 4px black;
-}
-/* 头像样式 */
-.author__avatar img {
-    border-radius: 10px;
-    border: 2px solid rgba(255,255,255,0.6);
-}
-
-/* --- 底部 Footer 透明化 --- */
+/* --- E. 底部 Footer --- */
 .page__footer, .page__footer footer {
     background-color: transparent !important;
     border: none !important;
 }
 .page__footer-copyright {
-    color: rgba(255, 255, 255, 0.6) !important;
+    color: rgba(255, 255, 255, 0.5) !important;
 }
 
-/* --- 中间内容区 (JS 渐变支持) --- */
-#main-content-wrapper {
-    background-color: rgba(0, 0, 0, 0); /* 初始透明 */
-    transition: background-color 0.2s ease;
-    padding: 20px;
+/* --- F. 侧边栏 (Sidebar) 修复 --- */
+.sidebar__content {
+    padding-top: 140px !important; /* 把内容挤下来 */
+    position: relative;
+}
+.sidebar {
+    background: transparent !important;
+    border: none !important;
+    z-index: 10;
+}
+.author__name {
+    color: #fff !important;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+    font-size: 1.8em !important;
 }
 
-/* --- 清除其他容器背景 --- */
-.page, .page__content, .archive, .author__urls-wrapper {
-    background-color: transparent !important;
-    box-shadow: none !important;
-}
-
-/* --- 通用链接颜色 --- */
-/* 正文链接保持淡蓝色，方便阅读 */
+/* --- G. 通用链接 --- */
+/* 正文里的链接用天蓝色，方便识别 */
 a {
     color: #87ceeb !important;
 }
 a:hover {
     color: #ffffff !important;
+    text-decoration: none;
 }
-/* 再次强调：导航栏链接必须是白的 (覆盖上面的通用设置) */
+/* 再次确保导航栏链接不受影响 */
 .masthead__menu-item a {
     color: #ffffff !important;
 }
