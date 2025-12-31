@@ -1,3 +1,29 @@
 <script src="{{ base_path }}/assets/js/main.min.js"></script>
 
 {% include analytics.html %}
+<script>
+// 等待页面加载完成
+document.addEventListener("DOMContentLoaded", function() {
+    var contentWrapper = document.getElementById("main-content-wrapper");
+    
+    // 监听滚动事件
+    window.addEventListener("scroll", function() {
+        // 获取当前滚动的距离
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // 计算透明度 (0 到 1)
+        // 这里的 500 代表滚动 500px 后完全变白。你可以调整这个数字。
+        // 数字越大，变白需要的距离越长。
+        var opacity = Math.min(scrollTop / 500, 1.0); 
+        
+        // 设置背景颜色：也就是 rgba(255, 255, 255, 透明度)
+        if(contentWrapper) {
+            contentWrapper.style.backgroundColor = "rgba(255, 255, 255, " + opacity + ")";
+            
+            // 可选：加一点模糊效果 (毛玻璃)，看起来更高级
+            // 如果不需要毛玻璃，删掉下面这一行
+            contentWrapper.style.backdropFilter = "blur(" + (opacity * 10) + "px)";
+        }
+    });
+});
+</script>
