@@ -40,174 +40,129 @@
     "vendor/font-awesome/brands",
     "vendor/magnific-popup/magnific-popup"
 ;
-/* --- 自定义背景设置 Start --- */
+/* ==========================================================================
+   SHIJIE FENG - CUSTOM THEME OVERRIDES (CLEAN VERSION)
+   ========================================================================== */
 
-/* 1. 设置全屏固定背景图 */
+/* --- 1. 全局背景图设置 --- */
 body {
-    background-image: url('/images/background.jpg'); /* 确保路径对应你的图片 */
-    background-size: cover;       /* 图片铺满全屏 */
-    background-position: center;  /* 图片居中 */
-    background-attachment: fixed; /* 关键：图片固定，不随滚动条移动 */
+    background-image: url('/images/background.jpg'); /* 背景图路径 */
+    background-size: cover;       /* 铺满 */
+    background-position: center;  /* 居中 */
+    background-attachment: fixed; /* 固定不滚动 */
     background-repeat: no-repeat;
+    /* 全局文字强制变白，带阴影 */
+    color: #ffffff !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
 }
 
-/* 2. 让网页默认的容器背景变透明，否则会挡住图片 */
-.page, .page__content, .archive, .author__urls-wrapper {
-    background-color: transparent !important; 
+/* 让默认的容器透明，否则会挡住背景图 */
+.page, .page__content, .archive, .author__urls-wrapper, #main-content-wrapper {
+    background-color: transparent !important;
     box-shadow: none !important;
 }
 
-/* 3. 定义我们想要变色的主容器 */
-/* 注意：academicpages 的主内容框通常是 .page__inner-wrap 或者 #main */
-#main-content-wrapper {
-    /* 初始状态：完全透明或者半透明 */
-    background-color: rgba(255, 255, 255, 0); 
-    padding: 2em; /* 加点内边距，好看一点 */
-    border-radius: 8px; /* 圆角 */
-    transition: background-color 0.1s ease-out; /* 让变化丝滑一点 */
-    min-height: 100vh;
-}
-
-/* 修复侧边栏如果不透明的问题 */
-.sidebar {
-    background-color: rgba(255, 255, 255, 0.8) !important;
-    border-radius: 8px;
-    padding: 10px;
-}
-
-/* --- 自定义背景设置 End --- */
-/* --- 顶部导航栏美化 --- */
-.masthead {
-    /* 背景改为半透明白色 (0.2 是透明度) */
-    background-color: rgba(255, 255, 255, 0.1) !important;
-    /* 关键：添加毛玻璃模糊效果 */
-    backdrop-filter: blur(10px);
+/* --- 2. 顶部导航栏 (Masthead) 深度透明化 --- */
+/* 关键：同时选中外层和内层，强制去除背景色 */
+.masthead, 
+.masthead__inner-wrap {
+    background-color: rgba(255, 255, 255, 0.1) !important; /* 10%透明度的白 */
+    backdrop-filter: blur(10px); /* 毛玻璃效果 */
     -webkit-backdrop-filter: blur(10px);
-    /* 去掉底部的分割线 */
-    border-bottom: none !important;
-    /* 让它悬浮在最顶层 */
-    position: sticky; 
-    top: 0;
-    z-index: 999;
+    border: none !important;
+    box-shadow: none !important;
 }
 
-/* =========================================
-   终极修复包：导航栏透明 + 侧边栏位置 + 全局白字
-   ========================================= */
-
-/* --- 1. 顶部导航栏 (Masthead) 样式 --- */
+/* 固定导航栏在顶部 */
 .masthead {
-    /* 背景改为白色，但透明度只有 20% */
-    background-color: rgba(255, 255, 255, 0.2) !important;
-    
-    /* 强力毛玻璃效果 (模糊背景) */
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    
-    /* 去掉底部边框 */
-    border-bottom: none !important;
-    
-    /* 固定在顶部 */
     position: sticky;
     top: 0;
-    
-    /* 保证它永远在最上面 */
-    z-index: 999; 
-    
-    /* 稍微加个阴影让层次分明 */
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    z-index: 999; /* 保证层级最高 */
+    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
 }
 
-/* --- 2. 导航栏文字颜色 --- */
+/* 导航栏文字样式 */
 .masthead__menu-item a {
-    color: #ffffff !important; /* 纯白文字 */
-    text-shadow: 0 2px 4px rgba(0,0,0,0.8); /* 文字加阴影，防看不清 */
-    font-weight: 600; /* 字体加粗 */
+    color: #ffffff !important;
+    font-weight: 700; /* 加粗 */
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
-/* 鼠标悬停时 */
 .masthead__menu-item a:hover {
-    color: #f2f2f2 !important;
-    text-decoration: underline;
+    color: #87ceeb !important; /* 悬停变天蓝色 */
+    text-decoration: none;
 }
 
-/* =========================================
-   Sidebar 位置终极修正 (Padding 法)
-   ========================================= */
-
-/* 1. 强行给侧边栏内容区上方加 120px 的隐形填充 */
-/* 这会把 "Shijie Feng" 这个名字直接往下挤，避开导航栏 */
-.sidebar__content {
-    padding-top: 120px !important; 
-    position: relative; /* 确保定位参照正确 */
-}
-
-/* 2. 确保侧边栏本身不带背景色，且层级正确 */
-.sidebar {
-    background-color: transparent !important;
+/* --- 3. 底部 Footer 深度透明化 --- */
+/* 关键：把 footer 的各层级全部设为透明 */
+.page__footer, 
+.page__footer footer, 
+.page__footer-copyright {
+    background-color: transparent !important; 
+    background: transparent !important;
     border: none !important;
-    z-index: 10; /* 必须比 Masthead (999) 小 */
-    margin-top: 0 !important; /* 防止其他的 margin 干扰 */
+    box-shadow: none !important;
+    margin-top: 0 !important;
 }
 
-/* 3. 再次确保名字的样式 */
-.author__name {
-    margin-top: 20px !important; /* 给名字再多加点额外的呼吸空间 */
-    color: #fff !important;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.9);
-}
-/* --- 4. 全局正文文字颜色调整 --- */
-body, h1, h2, h3, h4, h5, h6, p, li, a, .sidebar {
-    color: #ffffff !important; /* 强制变白 */
+/* 底部文字颜色 */
+.page__footer-copyright {
+    color: rgba(255, 255, 255, 0.6) !important; /* 浅灰白 */
+    text-align: center;
 }
 
-/* 给全局文字加一层淡淡的阴影，确保在任何背景图上都看清 */
-body {
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+/* --- 4. 侧边栏 (Sidebar) 修复与美化 --- */
+
+/* 位置修复：利用 Padding 把内容挤下来，避开导航栏 */
+.sidebar__content {
+    padding-top: 140px !important; 
+    position: relative;
 }
 
-/* 链接颜色 */
-a {
-    color: #87ceeb !important; /* 天蓝色链接 */
-}
-a:hover {
-    color: #ffffff !important; /* 悬停变白 */
-}
-/* --- 侧边栏职业化改造 --- */
-
-/* 1. 去掉侧边栏的白色背景和阴影 */
+/* 去除侧边栏自带的白框 */
 .sidebar {
     background: transparent !important;
-    opacity: 1 !important; /* 保证侧边栏一直清晰，不随中间内容变暗 */
     border: none !important;
+    opacity: 1 !important;
+    z-index: 10;
 }
 
-/* 2. 头像样式优化 */
+/* 头像美化 */
 .author__avatar img {
-    border-radius: 10px !important; /* 稍微圆角，不要全圆 */
-    border: 2px solid rgba(255,255,255,0.8); /* 加个细白边框显精致 */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.5); /* 头像立体感 */
+    border-radius: 12px !important; /* 圆角矩形 */
+    border: 2px solid rgba(255,255,255,0.5); 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
 
-/* 3. 侧边栏文字对齐和大小 */
-.sidebar .author__name {
-    font-size: 1.5em;
-    font-weight: 700;
-    margin-top: 10px;
-    text-shadow: 0 2px 4px black; /* 名字加重阴影 */
+/* 名字美化 */
+.author__name {
+    color: #fff !important;
+    font-size: 1.8em !important;
+    margin-top: 15px !important;
+    text-shadow: 0 2px 5px rgba(0,0,0,1);
 }
-.sidebar .author__bio {
-    font-size: 1em;
-    margin-bottom: 20px;
-    color: #e0e0e0 !important; /* 简介稍微灰一点，拉开层次 */
+.author__bio {
+    color: #ddd !important;
 }
 
-/* 4. 侧边栏链接列表 (Email, Github等) */
+/* 链接区域背景 */
 .author__urls-wrapper {
-    background: rgba(0, 0, 0, 0.3) !important; /* 给链接区加个极淡的黑底 */
-    padding: 10px;
+    background: rgba(0, 0, 0, 0.4) !important; /* 半透明黑底，让字能看清 */
+    padding: 15px !important;
     border-radius: 8px;
 }
 .author__urls li a {
+    color: #fff !important;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* --- 5. 通用元素颜色修正 --- */
+h1, h2, h3, h4, h5, h6, p, li {
     color: #ffffff !important;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+a {
+    color: #87ceeb !important; /* 链接天蓝色 */
+    text-decoration: none;
+}
+a:hover {
+    color: #ffffff !important;
 }
