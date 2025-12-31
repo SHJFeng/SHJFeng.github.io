@@ -130,25 +130,31 @@ body {
     text-decoration: underline;
 }
 
-/* --- 3. 侧边栏位置修复 (解决抵住顶部的问题) --- */
-.sidebar.sticky {
-    /* 关键：给它一个 100px 的顶部距离，给导航栏留出空间 */
-    top: 100px !important; 
-    
-    /* 层级比导航栏低，防止遮挡导航栏 */
-    z-index: 10;
-    
-    /* 移除侧边栏自带的背景框 */
-    background: transparent !important;
+/* =========================================
+   Sidebar 位置终极修正 (Padding 法)
+   ========================================= */
+
+/* 1. 强行给侧边栏内容区上方加 120px 的隐形填充 */
+/* 这会把 "Shijie Feng" 这个名字直接往下挤，避开导航栏 */
+.sidebar__content {
+    padding-top: 120px !important; 
+    position: relative; /* 确保定位参照正确 */
 }
 
-/* 侧边栏名字样式 */
+/* 2. 确保侧边栏本身不带背景色，且层级正确 */
+.sidebar {
+    background-color: transparent !important;
+    border: none !important;
+    z-index: 10; /* 必须比 Masthead (999) 小 */
+    margin-top: 0 !important; /* 防止其他的 margin 干扰 */
+}
+
+/* 3. 再次确保名字的样式 */
 .author__name {
+    margin-top: 20px !important; /* 给名字再多加点额外的呼吸空间 */
     color: #fff !important;
     text-shadow: 0 2px 5px rgba(0,0,0,0.9);
-    font-size: 1.8em !important;
 }
-
 /* --- 4. 全局正文文字颜色调整 --- */
 body, h1, h2, h3, h4, h5, h6, p, li, a, .sidebar {
     color: #ffffff !important; /* 强制变白 */
