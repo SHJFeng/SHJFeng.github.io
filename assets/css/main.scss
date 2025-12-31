@@ -8,81 +8,57 @@
    sorted by the dependencies. Also, the first two lines of the file are required by Jekyll.
  */
 
-@import 
-    "vendor/breakpoint/breakpoint",
+@charset "utf-8";
 
-    "themes",
-    "theme/{{ site.site_theme | default: 'default' }}",
-
-    "include/mixins",
-    "vendor/susy/susy",
-
-    "layout/reset",
-    "layout/base",
-
-    "include/utilities",
-    "layout/tables",
-    "layout/buttons",
-    "layout/notices",
-    "layout/masthead",
-    "layout/navigation",
-    "layout/footer",
-    "syntax",
-
-    "layout/forms",
-
-    "layout/page",
-    "layout/archive",
-    "layout/sidebar",
-    
-    "vendor/font-awesome/fontawesome",
-    "vendor/font-awesome/solid",
-    "vendor/font-awesome/brands",
-    "vendor/magnific-popup/magnific-popup"
-;
 /* ==========================================================================
-   SHIJIE FENG - FIXED VERSION (恢复渐变 + 去除白条)
+   1. JEKYLL & THEME IMPORTS (不要动这部分，保持原样)
+   ========================================================================== */
+@import "vendor/breakpoint/breakpoint";
+@import "themes";
+@import "theme/{{ site.site_theme | default: 'default' }}";
+@import "include/mixins";
+@import "vendor/susy/susy";
+@import "layout/reset";
+@import "layout/base";
+@import "include/utilities";
+@import "layout/tables";
+@import "layout/buttons";
+@import "layout/notices";
+@import "layout/masthead";
+@import "layout/navigation";
+@import "layout/footer";
+@import "syntax";
+@import "layout/forms";
+@import "layout/page";
+@import "layout/archive";
+@import "layout/sidebar";
+@import "vendor/font-awesome/fontawesome";
+@import "vendor/font-awesome/solid";
+@import "vendor/font-awesome/brands";
+@import "vendor/magnific-popup/magnific-popup";
+
+/* ==========================================================================
+   2. SHIJIE FENG - CUSTOM OVERRIDES (你的自定义样式)
    ========================================================================== */
 
-/* --- 1. 全局基础设置 --- */
+/* --- 全局背景与文字 --- */
 body {
-    background-image: url('/images/background.jpg'); /* 确保路径对 */
+    background-image: url('/images/background.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
-    /* 全局文字白色 */
+    /* 强制全局白字 */
     color: #ffffff !important;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8); /* 稍微减弱阴影，防止Sitemap模糊 */
 }
 
-/* 让所有默认容器透明，不挡背景 */
-.page, .page__content, .archive, .author__urls-wrapper {
-    background-color: transparent !important;
-    box-shadow: none !important;
-}
-
-/* --- 2. 核心：恢复 JS 渐变控制 (关键修改) --- */
-/* 这里千万不要加 background-color !important，否则 JS 就废了 */
-#main-content-wrapper {
-    /* 默认透明，等着 JS 来给它上色 */
-    background-color: rgba(0, 0, 0, 0); 
-    padding: 2em;
-    border-radius: 8px;
-    transition: background-color 0.1s ease-out; 
-    min-height: 100vh;
-}
-
-/* --- 3. 顶部导航栏 (Masthead) 强力去白 --- */
-/* 必须同时穿透外层 (.masthead) 和内层 (.masthead__inner-wrap) */
-.masthead, 
-.masthead__inner-wrap {
-    background-color: rgba(255, 255, 255, 0.1) !important; /* 10%透明度的微白 */
-    background: rgba(255, 255, 255, 0.1) !important;       /* 双重保险 */
-    border: none !important;
-    box-shadow: none !important;
+/* --- 顶部导航栏 (Masthead) 深度透明化 --- */
+.masthead, .masthead__inner-wrap {
+    background-color: rgba(255, 255, 255, 0.1) !important; /* 只有10%的白 */
     backdrop-filter: blur(10px); /* 毛玻璃 */
     -webkit-backdrop-filter: blur(10px);
+    border: none !important;
+    box-shadow: none !important;
 }
 
 .masthead {
@@ -92,60 +68,75 @@ body {
     border-bottom: 1px solid rgba(255,255,255,0.1) !important;
 }
 
-/* 导航栏文字 */
+/* --- 导航栏文字颜色 (解决蓝色悬停问题) --- */
+/* 默认状态：白字 */
 .masthead__menu-item a {
     color: #ffffff !important;
     font-weight: 700;
 }
+
+/* 悬停状态：改为白色发光 (不再是天蓝色 #87ceeb) */
 .masthead__menu-item a:hover {
-    color: #87ceeb !important;
+    color: #ffffff !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+    text-decoration: none !important;
 }
 
-/* --- 4. 底部 Footer 强力去白 --- */
-.page__footer, 
-.page__footer footer, 
-.page__footer-copyright {
-    background-color: transparent !important;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-}
-.page__footer-copyright {
-    color: rgba(255, 255, 255, 0.5) !important;
-    text-shadow: none !important; /* 去掉底部的阴影防止模糊 */
-}
-
-/* --- 5. 侧边栏与文字修复 --- */
+/* --- 侧边栏 (Sidebar) 修复 --- */
+/* 把内容往下挤，避开导航栏 */
 .sidebar__content {
-    padding-top: 140px !important; /* 避开导航栏 */
+    padding-top: 140px !important; 
     position: relative;
 }
+/* 去掉侧边栏背景 */
 .sidebar {
     background: transparent !important;
     border: none !important;
     z-index: 10;
 }
-
-/* 名字和头像 */
+/* 名字样式 */
 .author__name {
     color: #fff !important;
-    text-shadow: 0 2px 5px rgba(0,0,0,1);
     font-size: 1.8em !important;
-    margin-top: 10px !important;
+    text-shadow: 0 2px 4px black;
 }
+/* 头像样式 */
 .author__avatar img {
-    border-radius: 10px !important;
+    border-radius: 10px;
     border: 2px solid rgba(255,255,255,0.6);
 }
 
-/* 通用文字颜色修正 */
-h1, h2, h3, h4, h5, h6, p, li {
-    color: #ffffff !important;
+/* --- 底部 Footer 透明化 --- */
+.page__footer, .page__footer footer {
+    background-color: transparent !important;
+    border: none !important;
 }
+.page__footer-copyright {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* --- 中间内容区 (JS 渐变支持) --- */
+#main-content-wrapper {
+    background-color: rgba(0, 0, 0, 0); /* 初始透明 */
+    transition: background-color 0.2s ease;
+    padding: 20px;
+}
+
+/* --- 清除其他容器背景 --- */
+.page, .page__content, .archive, .author__urls-wrapper {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* --- 通用链接颜色 --- */
+/* 正文链接保持淡蓝色，方便阅读 */
 a {
     color: #87ceeb !important;
-    text-decoration: none;
 }
 a:hover {
+    color: #ffffff !important;
+}
+/* 再次强调：导航栏链接必须是白的 (覆盖上面的通用设置) */
+.masthead__menu-item a {
     color: #ffffff !important;
 }
