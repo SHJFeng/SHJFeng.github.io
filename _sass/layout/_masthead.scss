@@ -4,7 +4,16 @@
 
 .masthead {
   position: fixed;
-  background: var(--global-bg-color);
+  /* 1. 删除或注释掉原来的实心背景色 */
+  /* background: var(--global-bg-color); */ 
+
+  /* 2. 添加半透明背景 (这里用的是白色，透明度0.7，你可以调整 0.1-0.9) */
+  background: rgba(255, 255, 255, 0.7); 
+
+  /* 3. 添加毛玻璃模糊滤镜 */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* 兼容 Safari */
+
   border-bottom: 1px solid var(--global-border-color);
   height: $masthead-height;
   top: 0;
