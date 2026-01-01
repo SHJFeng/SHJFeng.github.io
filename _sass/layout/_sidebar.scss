@@ -11,7 +11,11 @@
           transform: translate3d(0, 0 , 0);
 
   @include clearfix();
-  margin-bottom: 1em;
+  /* --- 修改开始：手机端去除顶部间距 --- */
+  margin-top: 0;       // 强制去除顶部外边距
+  padding-top: 0;      // 强制去除顶部内边距
+  margin-bottom: 0.5em; // 稍微减小底部的空隙 (原为 1em)
+  /* --- 修改结束 --- */
 
   @media screen and (min-width: $sidebar-screen-min-width) {
     height: 100vh;
@@ -101,23 +105,26 @@
 }
 
 .author__content {
-  display: table-cell;
-  vertical-align: top;
+ display: table-cell;
+  vertical-align: middle; // 改为居中对齐，防止顶部留白 (原为 top)
   padding-left: 15px;
   padding-right: 25px;
   line-height: 1;
+  padding-top: 0;      // 强制去除顶部内边距
+  margin-top: 0;       // 强制去除顶部外边距
 
   @include breakpoint($large) {
     display: block;
     width: 100%;
     padding-left: 0;
     padding-right: 0;
+    vertical-align: top; // 电脑端恢复顶部对齐
   }
 }
 
 .author__name {
   margin: 0;
-
+  line-height: 1.2; // 收紧名字的行高
   @include breakpoint($large) {
     margin-top: 10px;
     margin-bottom: 10px;
