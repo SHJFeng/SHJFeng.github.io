@@ -5,6 +5,7 @@ html {
   /* sticky footer fix */
   position: relative;
   min-height: 100%;
+   background-color: #000 !important; /* 强制改成黑色 */
 }
 
 #main-content-wrapper {
