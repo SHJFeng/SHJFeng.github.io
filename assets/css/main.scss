@@ -155,3 +155,43 @@ a {
 a:hover {
     color: #ffffff !important;
 }
+/* ==========================================================================
+   6. 手机端 Header/Hero 终极调整 (Mobile Hero Fix)
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+  
+  /* 1. 区域整体上移 + 变矮 */
+  .page__hero--overlay {
+    /* 核心：把顶部的留白强制改为 0 或很小，这样内容就往上跑了 */
+    padding-top: 60px !important;    /* 留一点空间给汉堡菜单，不要完全贴顶 */
+    padding-bottom: 10px !important; /* 底部收紧，把下面的正文拉上来 */
+    min-height: auto !important;     /* 允许高度自动缩小 */
+  }
+  
+  /* 2. 名字 (Shijie Feng)：保持大号，甚至更大 */
+  .page__hero--overlay .page__title {
+    font-size: 2.4em !important;     /* 保持醒目大字体 */
+    margin-top: 0 !important;        /* 去掉名字上方的额外间距 */
+    margin-bottom: 5px !important;   /* 紧贴下面的名言 */
+    line-height: 1.1 !important;
+  }
+
+  /* 3. 名言 (The Quote)：变小、精致 */
+  .page__hero--overlay .page__lead {
+    font-size: 0.85em !important;    /* 缩小字号 (之前可能太大了) */
+    line-height: 1.3 !important;     /* 行间距收紧 */
+    max-width: 90% !important;       /* 宽度限制，防止贴边 */
+    margin-left: auto !important;    /* 居中 */
+    margin-right: auto !important;
+    margin-bottom: 5px !important;   /* 减少和落款的距离 */
+    font-weight: normal !important;  
+    font-style: italic !important;   /* 强制斜体 */
+  }
+  
+  /* 4. 落款 (J.D. Salinger)：变小 */
+  .page__hero--overlay p small {
+    font-size: 0.75em !important;     
+    display: block !important;       
+    margin-top: 0 !important;
+  }
+}
