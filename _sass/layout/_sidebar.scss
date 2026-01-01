@@ -81,14 +81,18 @@
    ========================================================================== */
 
 .author__avatar {
-  display: table-cell;
+  /* --- 安全修改：隐藏头像 --- */
+  /* 使用 display: none 让它彻底消失，不占用任何空间 */
+  /* 这样旁边的 .author__content (名字) 会自动向左对齐补位，不会破坏 table 布局 */
+  display: none !important; 
+
+  /* 保留原有属性作为“备份”，以防万一以后你想恢复头像 */
+  /* 虽然下面这些暂时不生效，但保留它们可以避免结构丢失 */
   vertical-align: top;
   width: 36px;
-  // set width only, for non-square avatars
-  // height: 36px;
 
   @include breakpoint($large) {
-    display: block;
+    display: none !important; /* 电脑端也强制隐藏 */
     width: auto;
     height: auto;
   }
