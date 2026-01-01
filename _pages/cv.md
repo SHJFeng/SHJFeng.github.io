@@ -9,44 +9,94 @@ redirect_from:
 
 {% include base_path %}
 
+Research Interests
+======
+* Arithmetic Geometry, Homotopical Algebra
+* Particular interest in $p$-adic Hodge theory, $p$-adic cohomologies and recent developments.
+
 Education
 ======
-* 2020-2024 B.S. in Mathematical and Applied Mathematics, Southwest University 
-* 2019-2020 Mechanical Engineering, Southwest University 
+* **M.Sc. in Mathematics (Master 2)**, Sorbonne Université, France
+  * *Sept 2025 -- Present*
+  * Track: Mathématiques Fondamentales
+  * Key Courses: Homology, Cohomology and Sheaves; Riemann Surfaces: Scheme Theory, Homotopy
 
-Experience
+* **Visiting Student**, Westlake University, Hangzhou, China
+  * *Nov 2024 -- Aug 2025*
+  * Courses Attended: Algebraic Number Theory, Category Theory, Six Functor Formalism, Diophantine Approximation.
+
+* **B.Sc. in Mathematics and Applied Mathematics**, Southwest University, Chongqing, China
+  * *Sept 2019 -- June 2024*
+  * **Online, Math in Moscow** (Sept 2023 -- Dec 2023): Course in *Algebraic Geometry: start-up course*.
+  * **Visiting Student, BICMR** (Feb 2023 -- June 2023): Courses in *Homology Theory* (100/100) and *Differential Topology* (82/100).
+  * **Transferred** from Mechanical Engineering to Mathematics in Sept 2020.
+  * **Core Courses**: Functional Analysis, Equation of Mathematical Physics, Dynamical Systems, Abstract Algebra, Module and Ring Theory, Elementary Number Theory, Differential Geometry, Function of Real Variable, ODE, Function of Complex Variable.
+  * **GPA**: 88.6/100
+
+Research Experience
 ======
-* Nov. 2024— Maintenant: West Lake University
-  * Visting Student
-  * Research Interests: Algebraic Geometry
-  
-* March. 2023— Jun. 2023: Beijing International Center for Mathematical Research (BICMR)
-  * Memember of 15th Enhanced Program for Graduate Study
-  * Courses taken: Homology Theory, Differential Topology
+* **Research Internship**
+  * *Summer 2025*, Westlake University
+  * Advisor: Prof. Lifan Guan
+  * Topic: *Fourier Mukai Transform in Algebraic Geometry*.
+  * Read Alice Rizzardo's paper *Adjoints to a Fourier Mukai functor* and Ben-Zvi, Francis and Nadler's paper *Integral Transform and Drinfeld Centers in Derived Algebraic Geometry*.
 
-* July. 2022& July. 2023: Global Immersion Program
-  * Courses taken: Computational Conformal Geometry and Mathematical Logic
+* **Bachelor Thesis: Topology of Algebraic Manifolds**
+  * *Feb 2024 -- May 2024*, Southwest University
+  * Advisor: Prof. Yanbo Zhou
+  * Followed Lefschetz's approach to apply the idea of Morse theory to study the topology of algebraic manifolds.
+  * The core is to prove theorems like Lefschetz hypersurface section theorem, weak Lefschetz theorem, hard Lefschetz theorem, and Lefschetz decomposition theorem.
 
-* Sep. 2023—Dec. 2023:“ Math in Moscow ” Program
-  * Courses taken: Algebraic Geometry: a start-up course
-  * Partly funded by Office of International Cooperation and Exchange at Southwest University
- 
-* Feb. 2024—Jun. 2024: Teaching Assistant
-  * Homework correcting and teaching in the exercise classes for the first year algebra course
-  
-About Math
+Workshops & Seminars
 ======
-* Sep. 2021—Dec. 2021: Homological Algebra Seminar
-  * Followed Hilton& Stammbach’s Book A Course in Homological Algebra
-* Sep. 2023—Nov. 2023: Galois Theory Seminar
-  * I’m the organizer and the main speaker
-  * We mainly followed P.Stevenhagen’s Algebra III course notes about Galois theory
-* Sep. 2023—Dec. 2023: Graduate course: Algebras and Representation theory:
-  * We follows Karin Erdmann and Thorsten Holm’s Algebras and Representation theory, covering theorems in Algebras like Jordan-Holder Theorem and Artin-Wedderburn Theorem and representations of associative algebra as well as representations of quivers
- 
+* **2025 International Mathematics Summer School**
+  * *July 2025*, Westlake University
+  * Studied short course on *Modular Forms*.
 
-COMPETITIONS & AWARDS
+* **Topics on Algebraic Surfaces and Threefolds (Conference)**
+  * *June 23-27, 2025*, Tianyuan Mathematical Center in Southeast China
+  * Gained familiarity with results of algebraic surfaces and algebraic threefolds in birational geometry.
+
+* **Abelian Varieties (Graduate Seminar)**
+  * *Mar 2024 -- June 2024*, Southwest University
+  * Followed David Mumford's *Abelian Varieties* (Chapter 1, 2, 3).
+
+* **Algebras and Representation Theory (Graduate Seminar/Course)**
+  * *Sept 2023 -- Dec 2023*, Southwest University
+  * Followed Karin Erdmann and Thorsten Holm's *Algebras and Representation theory*.
+
+* **Galois Theory (Undergraduate Seminar)**
+  * *Sept 2023 -- Oct 2023*, Southwest University
+  * **Organizer**: Organized the whole seminar and presented all talks by myself.
+  * Followed P. Stevenhagen's *Algebra III* course notes about Galois theory.
+
+* **Summer Semester: Mathematical Logic**
+  * *July 2023*, International Course, Southwest University
+
+* **Summer Semester: Computational Conformal Geometry**
+  * *July 2022*, International Course, Southwest University
+
+* **Homological Algebra (Graduate Seminar/Course)**
+  * *Sept 2021 -- Oct 2021*, Southwest University
+  * Followed Hilton & Stammbach's Book *A Course in Homological Algebra*.
+
+Teaching
 ======
-* China National Scholarship, Second scholarship, Third scholarship
-* 13th the Chinese Mathematics Competition (2021):the First Prize in Chongqing
+* **Teaching Assistant**, Southwest University
+  * *Spring 2024*, Course: *Linear Algebra B*
+  * Graded weekly homework assignments and led exercise sessions.
 
+* **Mentor for Freshman**, Southwest University
+  * *Fall 2022*, Courses: *Calculus*, *Linear Algebra*
+  * Taught subjects: *L'Hôpital Rule and Taylor Formula*, *Solving Simple Ordinary Equations*, and *Quadratic Form in Linear Algebra*.
+  * Responsible for answering questions in the online community.
+
+Awards & Honors
+======
+* **China National Scholarship; Second scholarship; Third scholarship** (2019, 2020, 2021)
+* **First Prize in Chongqing**, 13th Chinese Mathematics Competition (2021)
+
+Skills
+======
+* **Languages**: Chinese (Native), English (Fluent), French (Intermediate).
+* **Programming**: MATLAB, \LaTeX.
