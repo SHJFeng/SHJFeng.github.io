@@ -99,4 +99,4 @@ Awards & Honors
 Skills
 ======
 * **Languages**: Chinese (Native), English (Fluent), French (Intermediate).
-* **Programming**: MATLAB, \LaTeX.
+* **Programming**: MATLAB, $\LaTeX$.
