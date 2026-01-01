@@ -115,10 +115,10 @@ body {
     padding-top: 10px !important; 
 }
 
-/* 2. 针对电脑端（屏幕宽度大于 1024px）：才加上 140px 的避让距离 */
+/* 2. 针对电脑端（屏幕宽度大于 1024px）：才加上 140px 改为了100的避让距离 */
 @media screen and (min-width: 1024px) {
     .sidebar__content {
-        padding-top: 140px !important; /* 避开电脑端的导航栏 */
+        padding-top: 100px !important; /* 避开电脑端的导航栏 */
     }
 }
 
@@ -163,7 +163,7 @@ a:hover {
   /* 1. 区域整体上移 + 变矮 */
   .page__hero--overlay {
     /* 核心：把顶部的留白强制改为 0 或很小，这样内容就往上跑了 */
-    padding-top: 60px !important;    /* 留一点空间给汉堡菜单，不要完全贴顶 */
+    padding-top: 30px !important;    /* 留一点空间给汉堡菜单，不要完全贴顶 : 60改为了30*/
     padding-bottom: 10px !important; /* 底部收紧，把下面的正文拉上来 */
     min-height: auto !important;     /* 允许高度自动缩小 */
   }
