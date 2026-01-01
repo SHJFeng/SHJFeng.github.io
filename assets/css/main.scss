@@ -9,19 +9,6 @@
 /* ==========================================================================
    1. 核心模块引入 (不要动这部分，否则样式会崩)
    ========================================================================== */
-@charset "utf-8";
-
-/* 1. 先导入你当前的皮肤 (Air) */
-@import "minimal-mistakes/skins/air"; 
-
-$footer-background-color: #2c3e50; /* 把这个换成你想要的底部背景色 */
-$text-color: #333333;              /* 可选：如果底部颜色变深，你可能还需要调整全局或底部的文字颜色变量 */
-
-/* 3. 最后导入 Minimal Mistakes 的主样式引擎 */
-@import "minimal-mistakes";
-
-
-
 @import "vendor/breakpoint/breakpoint";
 @import "themes";
 @import "theme/{{ site.site_theme | default: 'default' }}";
