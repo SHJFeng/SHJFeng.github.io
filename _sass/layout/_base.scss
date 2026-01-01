@@ -12,9 +12,6 @@ html {
     background-color: transparent !important; /* 关键：背景设为透明 */
     border: none !important; /* 去掉边框 */
     box-shadow: none !important; /* 去掉阴影，如果有的话 */
-
-   
-  flex: 1; /* 让这个罩子自动填满剩余空间，把 footer 挤到底部 */
    
 }
 
@@ -23,10 +20,6 @@ body {
   color: var(--global-text-color);
   /*background-color: var(--global-bg-color);*/
    background-color:transparent;
-   
-   min-height: 100vh; /* 强制至少占满一个屏幕的高度 (vh = viewport height) */
-    display: flex;     /* 启用弹性布局 */
-    flex-direction: column; /* 垂直排列 */
 
   margin: 0;
   padding: $masthead-height 0 0;
