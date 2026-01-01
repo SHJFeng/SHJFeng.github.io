@@ -1,5 +1,49 @@
 {% include base_path %}
 
+<style>
+  @media screen and (max-width: 768px) {
+    /* 1. 外层容器：大幅压缩高度，避开汉堡菜单 */
+    .page__hero--overlay {
+      padding-top: 70px !important;    /* 留出顶部汉堡菜单的空间 */
+      padding-bottom: 20px !important; /* 底部收紧 */
+      min-height: auto !important;     /* 允许变矮 */
+    }
+
+    /* 2. 内层容器 (Wrapper)：清除默认的内边距，这是之前无效的关键原因 */
+    .page__hero--overlay .wrapper {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      margin-top: 0 !important;
+    }
+
+    /* 3. 标题 (Shijie Feng)：保持大号字体 */
+    .page__hero--overlay .page__title {
+      font-size: 2.2rem !important;    /* 使用 rem 单位更稳 */
+      margin-top: 0 !important;
+      margin-bottom: 10px !important;
+      line-height: 1.1 !important;
+      width: 100% !important;
+    }
+
+    /* 4. 名言 (Quote)：缩小字体，精致化 */
+    .page__hero--overlay .page__lead {
+      font-size: 0.9rem !important;    /* 缩小字号 */
+      line-height: 1.4 !important;
+      max-width: 95% !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      font-family: serif !important;   /* 保持衬线体风格 */
+      font-weight: normal !important;
+    }
+
+    /* 5. 名言落款：缩小 */
+    .page__hero--overlay p small {
+      font-size: 0.75rem !important;
+      margin-top: 5px !important;
+    }
+  }
+</style>
+
 {% if page.header.image contains "://" %}
   {% capture img_path %}{{ page.header.image }}{% endcapture %}
 {% else %}
