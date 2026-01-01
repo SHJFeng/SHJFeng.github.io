@@ -13,21 +13,6 @@ body {
   /*background-color: var(--global-bg-color);*/
    background-color:transparent;
 
-   background-image: url('/assets/images/background.jpg'); 
-  
-  /* 2. 让图片铺满整个屏幕，不要变形 */
-  background-size: cover;
-  
-  /* 3. 禁止图片重复平铺 */
-  background-repeat: no-repeat;
-  
-  /* 4. 【关键】让背景图固定不动！ */
-  /* 这样当你滚动页面时，底部栏透出来的就是这张图的底部，效果最棒 */
-  background-attachment: fixed; 
-  
-  /* 5. 图片居中显示 */
-  background-position: center center;
-
   margin: 0;
   padding: $masthead-height 0 0;
   padding-bottom: 9em;
