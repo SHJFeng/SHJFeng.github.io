@@ -8,11 +8,53 @@ redirect_from:
 ---
 
 
-I'm Shijie Feng, currently studying in [West Lake University](https://science.westlake.edu.cn/en/About/areasofstudy/Overview_2/) as a visiting student and I have obtained my Bachelor degree from [Southwest University](http://math.swu.edu.cn/) in 2024. My interests is Algebraic Geometry.
+I'm Shijie Feng, currently studying in [M2 de Mathématiques fondamentales](https://master-math-fonda.imj-prg.fr/) of[Sorbonne Université](https://www.sorbonne-universite.fr/). My research interests lie in Arithmetic Geometry and Algebraic Geometry, with a particular focus on $p$-adic cohomology theories (such as crystalline and prismatic cohomology). I am also interested in the applications of homotopical algebra and $\infty$-categories to arithmetic problems.
 a
 a
 a
 a
+a
+a
+a
+a
+
+a
+
+a
+
+a
+
+a
+a
+a
+a
+a
+a
+a
+a
+
+aa
+a
+
+a
+a
+a
+
+a
+a
+a
+a
+
+a
+a
+a
+a
+a
+
+a
+a
+a
+
 
 
 
