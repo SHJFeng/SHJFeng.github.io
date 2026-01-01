@@ -11,9 +11,7 @@ redirect_from:
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
 
-I'm Shijie Feng <span style="font-family: 'STKaiti', 'KaiTi', '楷体', serif; font-size: 1.15em;">冯诗藉</span>.
-
-I'm currently studying in [M2 de Mathématiques Fondamentales](https://master-math-fonda.imj-prg.fr/) of [Sorbonne Université](https://www.sorbonne-universite.fr/). My research interests lie in Arithmetic Geometry and Algebraic Geometry, with a particular focus on $p$-adic cohomology theories (such as crystalline and prismatic cohomology). I am also interested in the applications of homotopical algebra and $\infty$-categories to arithmetic problems.
+I'm Shijie Feng, currently studying in [M2 de Mathématiques Fondamentales](https://master-math-fonda.imj-prg.fr/) of [Sorbonne Université](https://www.sorbonne-universite.fr/). My research interests lie in Arithmetic Geometry and Algebraic Geometry, with a particular focus on $p$-adic cohomology theories (such as crystalline and prismatic cohomology). I am also interested in the applications of homotopical algebra and $\infty$-categories to arithmetic problems.
 
 <br>
 <br>
