@@ -4,7 +4,12 @@
 
 .page__footer {
   @include clearfix;
-  background-color: var(--global-bg-color);
+  /*background-color: var(--global-bg-color);*/
+   /* 2. 替换为与你顶部导航栏一致的毛玻璃代码 */
+  background-color: rgba(255, 255, 255, 0.7);  /* 半透明白，0.7可调整 */
+  backdrop-filter: blur(10px);                  /* 模糊滤镜 */
+  -webkit-backdrop-filter: blur(10px);          /* 兼容 Safari */
+  /* ================== 修改结束 ================== */
   color: var(--global-text-color-light);
 
   float: left;
