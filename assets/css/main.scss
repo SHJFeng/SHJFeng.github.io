@@ -108,11 +108,20 @@ body {
     text-shadow: none !important; /* 去掉底部的阴影防止模糊 */
 }
 
-/* --- 5. 侧边栏与文字修复 --- */
+/* --- 5. 侧边栏与文字修复 (已修改为响应式) --- */
 .sidebar__content {
-    padding-top: 140px !important; /* 避开导航栏 */
     position: relative;
+    /* 1. 默认设置（针对手机端）：去除巨大的顶部留白 */
+    padding-top: 10px !important; 
 }
+
+/* 2. 针对电脑端（屏幕宽度大于 1024px）：才加上 140px 的避让距离 */
+@media screen and (min-width: 1024px) {
+    .sidebar__content {
+        padding-top: 140px !important; /* 避开电脑端的导航栏 */
+    }
+}
+
 .sidebar {
     background: transparent !important;
     border: none !important;
@@ -126,9 +135,13 @@ body {
     font-size: 1.8em !important;
     margin-top: 10px !important;
 }
+
+/* 如果你没有放照片，为了防止空白框，可以隐藏头像容器或者保留样式但实际上不显示 */
 .author__avatar img {
     border-radius: 10px !important;
     border: 2px solid rgba(255,255,255,0.6);
+    /* 如果彻底没照片，且不想显示空框，可以加下面这行：*/
+    /* display: none; */ 
 }
 
 /* 通用文字颜色修正 */
