@@ -108,95 +108,56 @@
 }
 
 .page__hero {
-  position: relative;
-  margin-bottom: 2em;
-  @include clearfix;
-  animation: intro 0.3s both;
-  animation-delay: 0.25s;
+  position: relative;
+  margin-bottom: 2em;
+  @include clearfix;
+  animation: intro 0.3s both;
+  animation-delay: 0.25s;
 
-  &--overlay {
-    position: relative;
-    margin-bottom: 2em;
-    @include clearfix;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    animation: intro 0.3s both;
-    animation-delay: 0.25s;
+  &--overlay {
+    position: relative;
+    margin-bottom: 2em;
+    padding: 3em 0;
+    @include clearfix;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: intro 0.3s both;
+    animation-delay: 0.25s;
 
-    /* --- 1. 手机端布局核心设置 (Mobile Layout) --- */
-    /* 顶部留 60px 防止被汉堡菜单挡住，底部 20px 紧凑一点 */
-    padding: 60px 0 20px 0;
-    min-height: auto; 
-    text-align: center; /* 手机上文字居中 */
+    a {
+      color: #fff;
+    }
 
-    /* --- 2. 电脑端恢复原样 (Desktop Layout) --- */
-    @include breakpoint($large) {
-      padding: 3em 0;  /* 恢复原本的大留白 */
-      min-height: 20em; /* 恢复高度 */
-      text-align: left; /* 电脑上可以恢复左对齐，或者保持 center 看你喜好 */
-    }
+    .wrapper {
+      padding-left: 1em;
+      padding-right: 1em;
 
-    a {
-      color: #fff;
-    }
+      @include breakpoint($x-large) {
+        max-width: $x-large;
+      }
+    }
 
-    .wrapper {
-      padding-left: 1em;
-      padding-right: 1em;
+    .page__title,
+    .page__meta,
+    .page__lead,
+    .btn {
+      color: #fff;
+      text-shadow: 1px 1px 4px rgba(#000, 0.5);
+    }
 
-      @include breakpoint($x-large) {
-        max-width: $x-large;
-      }
-    }
+    .page__lead {
+      max-width: $medium;
+    }
 
-    .page__title,
-    .page__meta,
-    .page__lead,
-    .btn {
-      color: #fff;
-      text-shadow: 1px 1px 4px rgba(#000, 0.5);
-    }
+    .page__title {
+      font-size: $type-size-2;
 
-    /* --- 3. 名言 (The Quote) --- */
-    .page__lead {
-      /* 手机端：小号、精致、斜体 */
-      font-size: 0.85rem; 
-      line-height: 1.4;
-      max-width: 90%;
-      margin-left: auto;
-      margin-right: auto;
-      font-style: italic;
-      font-family: serif; /* 如果你想更有格调一点 */
-
-      /* 电脑端：恢复大号 */
-      @include breakpoint($large) {
-        font-size: $type-size-4; /* 恢复默认大字体 */
-        max-width: $medium;
-        font-style: normal;      /* 电脑上恢复正常样式 */
-      }
-    }
-
-    /* --- 4. 标题 (Shijie Feng) --- */
-    .page__title {
-      /* 手机端：保持大号醒目 */
-      font-size: 2.2rem;
-      line-height: 1.1;
-      margin-top: 0;
-      margin-bottom: 0.2em;
-
-      @include breakpoint($small) {
-        font-size: $type-size-1; /* 平板/电脑上变得更大 */
-      }
-    }
-    
-    /* 落款 (Salinger) 的小字修正 */
-    p small {
-       font-size: 0.7rem;
-       display: block;
-       margin-top: 5px;
-    }
-  }
+      @include breakpoint($small) {
+        font-size: $type-size-1;
+      }
+    }
+  }
 }
 
 .page__hero-image {
