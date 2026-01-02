@@ -1,6 +1,5 @@
 <script type="module" src="{{ base_path }}/assets/js/main.min.js"></script>
 <script nomodule src="{{ base_path }}/assets/js/main.min.js"></script>
-
 {% include analytics.html %}
 
 <script>
@@ -8,68 +7,57 @@ document.addEventListener("DOMContentLoaded", function() {
     const toggleBtn = document.getElementById("theme-toggle");
     const themeIcon = document.getElementById("theme-icon");
     const contentWrapper = document.getElementById("main-content-wrapper");
-    const body = document.body;
+    //  关键：获取 html 标签
+    const htmlEl = document.documentElement;
+    const bodyEl = document.body;
 
-    // --- A. 初始化：检查本地存储 ---
-    if (localStorage.getItem("theme") === "dark") {
-        body.classList.add("dark");
+    // --- A. 初始化状态同步 ---
+    // 因为 head 里已经设置了 html 的 class，这里主要是同步图标和 body
+    if (htmlEl.classList.contains("dark") || localStorage.getItem("theme") === "dark") {
+        htmlEl.classList.add("dark"); // 确保 html 有
+        bodyEl.classList.add("dark"); // body 也加上（双重保险）
         if(themeIcon) { themeIcon.classList.remove("fa-sun"); themeIcon.classList.add("fa-moon"); }
     }
 
-    // --- B. 滚动特效函数 (智能变色) ---
+    // --- B. 滚动特效 (保持不变) ---
     function updateBackground() {
         if (!contentWrapper) return;
-        
         var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        // 500px 距离达到最大不透明度 0.95
         var opacity = Math.min(scrollTop / 500, 0.95);
-        var isDark = body.classList.contains("dark");
+        // 判断依据：查 html 标签
+        var isDark = htmlEl.classList.contains("dark");
 
         if (isDark) {
-            // 夜间模式：黑幕 (RGBA 0,0,0)
             contentWrapper.style.backgroundColor = "rgba(0, 0, 0, " + opacity + ")";
-            // 夜间建议模糊稍微强一点
             contentWrapper.style.backdropFilter = "blur(" + (opacity * 15) + "px)"; 
         } else {
-            // 日间模式：白雾 (RGBA 255,255,255)
             contentWrapper.style.backgroundColor = "rgba(255, 255, 255, " + opacity + ")";
             contentWrapper.style.backdropFilter = "blur(" + (opacity * 10) + "px)";
         }
     }
-
-    // 绑定滚动事件
     window.addEventListener("scroll", updateBackground);
-    // 初始化执行一次
     updateBackground();
 
-    // --- C. 点击切换逻辑 ---
+    // --- C. 点击切换逻辑 (同步切换 html 和 body) ---
     if (toggleBtn) {
         toggleBtn.addEventListener("click", function(e) {
             e.preventDefault();
             
-            // 切换 dark 类
-            body.classList.toggle("dark");
+            //  同时切换两个地方
+            htmlEl.classList.toggle("dark");
+            bodyEl.classList.toggle("dark");
             
-            // 切换图标 和 存储设置
-            if (body.classList.contains("dark")) {
+            var isDark = htmlEl.classList.contains("dark");
+
+            if (isDark) {
                 localStorage.setItem("theme", "dark");
                 if(themeIcon) { themeIcon.classList.remove("fa-sun"); themeIcon.classList.add("fa-moon"); }
             } else {
                 localStorage.setItem("theme", "light");
                 if(themeIcon) { themeIcon.classList.remove("fa-moon"); themeIcon.classList.add("fa-sun"); }
             }
-            
-            // 立即更新背景颜色 (不用等滚动)
             updateBackground();
         });
     }
 });
 </script>
-
-<script>
-  window.MathJax = {
-    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
-    options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
-  };
-</script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
