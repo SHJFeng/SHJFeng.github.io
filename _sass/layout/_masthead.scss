@@ -1,77 +1,36 @@
 /* ==========================================================================
-   MASTHEAD (White Text & No Borders)
+   Mobile Navigation Fixes (Frosted Glass)
    ========================================================================== */
 
-.masthead {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: $masthead-height;
-  z-index: 20;
-
-  /* 背景：半透明白 + 毛玻璃 */
-  background: rgba(255, 255, 255, 0.2); 
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-
-  /* 保持无边框 */
-  border-bottom: none; 
-
-  -webkit-animation: intro 0.3s both;
-          animation: intro 0.3s both;
-  -webkit-animation-delay: 0.15s;
-          animation-delay: 0.15s;
-
-  &__inner-wrap {
-    @include container;
-    @include clearfix;
-    padding: 1em;
-    font-family: $sans-serif-narrow;
-
-    /* 内部容器透明 */
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-
-    @include breakpoint($x-large) {
-      max-width: $x-large;
-    }
-
-    nav {
-      z-index: 10;
-    }
-
-    /* 🔴 要求三：导航栏链接文字改为白色 */
-    a {
-      text-decoration: none;
-      color: #ffffff !important; /* 强制白色 */
-      font-weight: 700;          /* 加粗一点更好看 */
-    }
+/* 这里的 max-width 对应主题的 breakpoint，通常 medium 或 large 会触发汉堡菜单 */
+@media (max-width: 64em) { 
+  
+  .masthead__menu ul {
+    /* 1. 日间模式：淡白毛玻璃 (和底部保持一致) */
+    background-color: rgba(255, 255, 255, 0.15) !important; /* 极淡的白 */
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
     
-    /* 鼠标悬停变色 (可选，比如变浅蓝) */
-    a:hover {
-      color: #5ab1ff !important;
-    }
+    /* 稍微加点圆角和内边距，让下拉菜单更好看 */
+    border-radius: 8px;
+    padding: 10px 0;
+    margin-top: 10px; /* 和顶部拉开一点距离 */
   }
-}
 
-.masthead__menu {
-  ul {
-    margin: 0;
-    padding: 0;
-    clear: both;
-    list-style-type: none;
+  /* 2. 夜间模式：黑色毛玻璃 */
+  body.dark .masthead__menu ul {
+    background-color: rgba(0, 0, 0, 0.6) !important; /* 半透明黑 */
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
   }
-}
-
-.masthead__menu-item {
-  display: block;
-  list-style-type: none;
-  white-space: nowrap;
-  background-color: transparent !important; 
-
-  &--lg {
-    padding-right: 2em;
-    font-weight: 700;
+  
+  /* 修复夜间模式下，下拉菜单里的文字颜色 */
+  body.dark .masthead__menu-item a {
+    color: #ffffff !important;
+  }
+  
+  /* 修复日间模式下，下拉菜单里的文字颜色 (确保是白字，因为你的背景图较深) */
+  .masthead__menu-item a {
+    color: #ffffff !important;
   }
 }
