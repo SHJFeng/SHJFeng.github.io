@@ -1,51 +1,55 @@
 /* ==========================================================================
-   Mobile Navigation Fixes (Frosted Glass)
+   Masthead Final Refinement
    ========================================================================== */
 
-/* 这里的 max-width 对应主题的 breakpoint，通常 medium 或 large 会触发汉堡菜单 */
-@media (max-width: 64em) { 
+.masthead {
+  /* 确保整个导航栏背景是毛玻璃，且内部文字统一 */
   
-  .masthead__menu ul {
-    /* 1. 日间模式：淡白毛玻璃 (和底部保持一致) */
-    background-color: rgba(255, 255, 255, 0.15) !important; /* 极淡的白 */
-    backdrop-filter: blur(15px) !important;
-    -webkit-backdrop-filter: blur(15px) !important;
+  .greedy-nav {
+    display: flex;
+    align-items: center;
     
-    /* 稍微加点圆角和内边距，让下拉菜单更好看 */
-    border-radius: 8px;
-    padding: 10px 0;
-    margin-top: 10px; /* 和顶部拉开一点距离 */
-  }
+    .visible-links {
+      display: flex;
+      width: 100%; /* 撑满容器 */
+      align-items: center;
+      
+      li {
+        /* 🔴 修正一：强制白天模式导航栏文字为白色 */
+        a {
+          color: #ffffff !important; 
+          text-decoration: none;
+          transition: opacity 0.2s;
 
-  /* 2. 夜间模式：黑色毛玻璃 */
-  body.dark .masthead__menu ul {
-    background-color: rgba(0, 0, 0, 0.6) !important; /* 半透明黑 */
-    backdrop-filter: blur(15px) !important;
-    -webkit-backdrop-filter: blur(15px) !important;
-  }
-  
-  /* 修复夜间模式下，下拉菜单里的文字颜色 */
-  body.dark .masthead__menu-item a {
-    color: #ffffff !important;
-  }
-  
-  /* 修复日间模式下，下拉菜单里的文字颜色 (确保是白字，因为你的背景图较深) */
-  .masthead__menu-item a {
-    color: #ffffff !important;
+          &:hover {
+            opacity: 0.8;
+            color: #ffffff !important;
+          }
+        }
+      }
+    }
   }
 }
-/* 确保按钮和名字之间的间距平衡 */
+
+/* 🔴 修正二：按钮位置与间距 */
 #theme-toggle {
-  margin-right: 0.2em; /* 调整图标与名字的距离 */
-  vertical-align: middle;
+  /* margin-left: auto 会将该元素推向父容器的最右侧 */
+  margin-left: auto !important; 
+  padding-right: 5px; /* 留一点点距离，不贴死边缘 */
+  
+  a {
+    display: flex;
+    align-items: center;
+  }
 }
 
-/* 针对 greedy-nav 的特殊修正：防止按钮被误判为可折叠项 */
-.greedy-nav .visible-links li:first-child {
-  display: inline-block !important;
+/* 🔴 修正三：解决整体向左移动的问题 */
+/* 确保标题和第一个链接之间有正常的间距 */
+.masthead__menu-item--lg {
+  margin-right: 1.5em; /* 名字右侧留出空间 */
 }
 
-/* 既然你已经写好了手机端下拉背景，确保 .hidden-links 的 z-index 足够高 */
-.hidden-links {
-  z-index: 99;
+/* 夜间模式适配：确保文字依然是白色 */
+html.dark .masthead .greedy-nav .visible-links li a {
+  color: #ffffff !important;
 }
