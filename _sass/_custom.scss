@@ -23,8 +23,7 @@ body {
 }
 
 /* 3. 全局立体阴影 (保持不变) */
-body, 
-.masthead, 
+body,  
 .sidebar, 
 .page__footer, 
 .author__name, 
@@ -96,4 +95,16 @@ h1, h2, h3, h4, h5, h6, .page__title, .author__name {
 small, .small {
     /* 这里改成你想要的浅灰色，0.8 表示 80% 不透明度的白色，看起来就是很舒服的浅灰 */
     color: rgba(255, 255, 255, 0.8) !important; 
+}
+/* ==========================================================================
+   Masthead Shadow Override (Lighter)
+   ========================================================================== */
+
+/* 强制把导航栏(包含里面的链接和文字)的阴影改浅 */
+.masthead, 
+.masthead a, 
+.masthead__menu-item, 
+.greedy-nav {
+    /* 偏移1px，模糊3px，透明度0.5 (比全局的0.9浅一半) */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5) !important;
 }
