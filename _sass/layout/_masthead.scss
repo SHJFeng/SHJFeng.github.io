@@ -1,51 +1,72 @@
 /* ==========================================================================
-   Mobile Navigation Fixes (Frosted Glass)
+   MASTHEAD (Fixed: Single Full-width Bar)
    ========================================================================== */
 
-/* 这里的 max-width 对应主题的 breakpoint，通常 medium 或 large 会触发汉堡菜单 */
-@media (max-width: 64em) { 
-  
-  .masthead__menu ul {
-    /* 1. 日间模式：淡白毛玻璃 (和底部保持一致) */
-    background-color: rgba(255, 255, 255, 0.15) !important; /* 极淡的白 */
-    backdrop-filter: blur(15px) !important;
-    -webkit-backdrop-filter: blur(15px) !important;
-    
-    /* 稍微加点圆角和内边距，让下拉菜单更好看 */
-    border-radius: 8px;
-    padding: 10px 0;
-    margin-top: 10px; /* 和顶部拉开一点距离 */
-  }
+.masthead {
+  /* 1. 外层容器：负责全屏宽度和毛玻璃背景 */
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: $masthead-height;
+  z-index: 20;
 
-  /* 2. 夜间模式：黑色毛玻璃 */
-  body.dark .masthead__menu ul {
-    background-color: rgba(0, 0, 0, 0.6) !important; /* 半透明黑 */
-    backdrop-filter: blur(15px) !important;
-    -webkit-backdrop-filter: blur(15px) !important;
-  }
-  
-  /* 修复夜间模式下，下拉菜单里的文字颜色 */
-  body.dark .masthead__menu-item a {
-    color: #ffffff !important;
-  }
-  
-  /* 修复日间模式下，下拉菜单里的文字颜色 (确保是白字，因为你的背景图较深) */
-  .masthead__menu-item a {
-    color: #ffffff !important;
+  /* 2. 核心样式：统一设置白天和黑夜的毛玻璃 */
+  /* 这里设置基础样式，Day Mode 和 Night Mode 都会继承 */
+  background: rgba(255, 255, 255, 0.2); 
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  /* 去除外层边框 */
+  border-bottom: none; 
+
+  -webkit-animation: intro 0.3s both;
+          animation: intro 0.3s both;
+  -webkit-animation-delay: 0.15s;
+          animation-delay: 0.15s;
+
+  &__inner-wrap {
+    @include container;
+    @include clearfix;
+    padding: 1em;
+    font-family: $sans-serif-narrow;
+
+    /* 3. 内层容器：彻底清除所有背景和边框，消除“中间的小方框” */
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+
+    @include breakpoint($x-large) {
+      max-width: $x-large;
+    }
+
+    nav {
+      z-index: 10;
+    }
+
+    a {
+      text-decoration: none;
+    }
   }
 }
-/* 确保按钮和名字之间的间距平衡 */
-#theme-toggle {
-  margin-right: 0.2em; /* 调整图标与名字的距离 */
-  vertical-align: middle;
+
+.masthead__menu {
+  ul {
+    margin: 0;
+    padding: 0;
+    clear: both;
+    list-style-type: none;
+  }
 }
 
-/* 针对 greedy-nav 的特殊修正：防止按钮被误判为可折叠项 */
-.greedy-nav .visible-links li:first-child {
-  display: inline-block !important;
-}
+.masthead__menu-item {
+  display: block;
+  list-style-type: none;
+  white-space: nowrap;
+  /* 确保菜单项本身无背景 */
+  background-color: transparent !important; 
 
-/* 既然你已经写好了手机端下拉背景，确保 .hidden-links 的 z-index 足够高 */
-.hidden-links {
-  z-index: 99;
+  &--lg {
+    padding-right: 2em;
+    font-weight: 700;
+  }
 }
