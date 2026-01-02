@@ -6,16 +6,22 @@
 
 <link href="{% if site.atom_feed.path %}{{ site.atom_feed.path }}{% else %}{{ base_path }}/feed.xml{% endif %}" type="application/atom+xml" rel="alternate" title="{{ site.title }} Feed">
 
-<!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script>
+  // 1. 原有的逻辑：移除 no-js 类名
   document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+  // 2. 新增的防闪烁逻辑 (从源头解决背景图切换延迟)
+  // 如果本地存储里记录了 "dark"，立刻给 <html> 标签加上 dark 类名
+  // 这样 CSS 里的 body.dark 背景图规则就会立即生效，不会闪屏
+  if (localStorage.getItem("theme") === "dark") {
+    document.documentElement.classList.add("dark");
+  }
 </script>
 
-<!-- For all browsers -->
 <link rel="stylesheet" href="{{ base_path }}/assets/css/main.css">
 
 <meta http-equiv="cleartype" content="on">
