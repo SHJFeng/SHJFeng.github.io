@@ -1,23 +1,27 @@
 /* ==========================================================================
-   FOOTER (Source Fix)
+   FOOTER (Source Fix: Transparent & Clean)
    ========================================================================== */
 
 .page__footer {
   @include clearfix;
   width: 100%;
   
-  /* 🔴 源头修改：强制背景透明 */
+  /* 1. 强制背景透明，透出 body 的大背景图 */
   background-color: transparent;
   background: transparent;
   
-  /* 去掉顶部的分割线 */
+  /* 2. 去除所有边框和阴影 */
   border-top: none;
   box-shadow: none;
 
-  margin-top: 2em; 
+  margin-top: 2em; /* 保持与正文的一点距离 */
 
-  /* 确保文字颜色可见（使用半透明白，适应白天和黑夜背景图） */
+  /* 3. 文字颜色：确保在深色背景图上可见 */
   color: rgba(255, 255, 255, 0.6);
+
+  /* 删除旧的绝对定位代码，交给 _layouts/default.html 的 Flexbox 控制 */
+  /* position: absolute;  <-- 已删除 */
+  /* bottom: 0em;         <-- 已删除 */
 
   -webkit-animation: intro 0.3s both;
           animation: intro 0.3s both;
@@ -55,6 +59,8 @@
 .page__footer-copyright {
   font-family: $global-font-family;
   font-size: $type-size-7;
+  /* 确保版权文字区域也没有背景色 */
+  background: transparent;
 }
 
 .page__footer-follow {
