@@ -1,25 +1,22 @@
 /* ==========================================================================
-   BASE ELEMENTS
+   BASE ELEMENTS (Cleaned & Fixed)
    ========================================================================== */
+
 html {
   /* sticky footer fix */
   position: relative;
   min-height: 100%;
-   background-color: transparent !important; /* 强制改成黑色 */
+  /* 删除了这里的 background-color !important，解决底部白条问题 */
 }
 
-#main-content-wrapper {
-    background-color: transparent !important; /* 关键：背景设为透明 */
-    border: none !important; /* 去掉边框 */
-    box-shadow: none !important; /* 去掉阴影，如果有的话 */
-   
-}
+/* 删除了 #main-content-wrapper 的强制透明代码，解决毛玻璃失效问题 */
 
 body {
   /* Set via _themes.scss */
   color: var(--global-text-color);
-  /*background-color: var(--global-bg-color);*/
-   background-color:transparent;
+  
+  /* 恢复默认变量，图片背景会由 _custom.scss 覆盖，不用担心 */
+  background-color: var(--global-bg-color);
 
   margin: 0;
   padding: $masthead-height 0 0;
@@ -280,19 +277,6 @@ svg:not(:root) {
    Navigation lists
    ========================================================================== */
 
-/**
- * Removes margins, padding, and bullet points from navigation lists
- *
- * Example usage:
- * <nav>
- *    <ul>
- *      <li><a href="#link-1">Link 1</a></li>
- *      <li><a href="#link-2">Link 2</a></li>
- *      <li><a href="#link-3">Link 3</a></li>
- *    </ul>
- *  </nav>
- */
-
 nav {
   ul {
     margin: 0;
@@ -349,10 +333,6 @@ b, i, strong, em, blockquote, p, q, span, figure, img, h1, h2, header, input, a,
 
 /* ==========================================================================
    PRINT STYLES
-   ========================================================================== */
-
-/*
-   Hide the following elements on print
    ========================================================================== */
 
    @media print {
