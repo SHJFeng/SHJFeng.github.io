@@ -1,28 +1,23 @@
 /* ==========================================================================
-   FOOTER
+   FOOTER (Source Fix)
    ========================================================================== */
 
 .page__footer {
   @include clearfix;
-  
-  /* 1. 源头修改：背景透明，去边框 */
-  background-color: transparent;
-  border-top: none;
-  
-  /* 确保文字颜色在深色背景上可见，使用半透明白 */
-  color: rgba(255, 255, 255, 0.6);
-
-  /* 2. 核心修改：删除原来的 float 和 absolute 定位 */
-  /* float: left;  <-- 删除 */
   width: 100%;
-  /* clear: both; <-- 删除 */
   
-  /* 3. 删除旧版 Sticky Footer Hack (因为我们要用 Flexbox) */
-  /* position: absolute; <-- 必须删除 */
-  /* bottom: 0em;        <-- 必须删除 */
-  /* height: auto;       <-- 必须删除 */
+  /* 🔴 源头修改：强制背景透明 */
+  background-color: transparent;
+  background: transparent;
+  
+  /* 去掉顶部的分割线 */
+  border-top: none;
+  box-shadow: none;
 
-  margin-top: 2em; /* 保持与正文的一点距离 */
+  margin-top: 2em; 
+
+  /* 确保文字颜色可见（使用半透明白，适应白天和黑夜背景图） */
+  color: rgba(255, 255, 255, 0.6);
 
   -webkit-animation: intro 0.3s both;
           animation: intro 0.3s both;
@@ -48,12 +43,12 @@
 
     &:hover {
       text-decoration: underline;
-      color: #fff; /* hover 高亮 */
+      color: #fff;
     }
   }
 
   .fas, .fab, .far, .fal {
-    color: inherit; /* 跟随父元素颜色 */
+    color: inherit;
   }
 }
 
