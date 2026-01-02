@@ -3,25 +3,24 @@
    ========================================================================== */
 
 /* 1. 根标签 (HTML) */
-/* 这里设置颜色是为了防止图片加载失败时显示默认白，但在正常情况下不应被看到 */
+/* 🔴 核心修改：将 HTML 设为透明，防止底部露出白条 */
 html {
-    background-color: #ffffff; 
+    background-color: transparent; 
     height: 100%;
 }
-html.dark {
-    background-color: #1a1a1a;
-}
 
-/* 2. Body 背景图设置 (解决白条的核心) */
+/* 2. Body 背景图设置 */
 body {
+    /* 你的背景图 */
     background-image: url('/images/background.jpg');
-    background-size: cover;      /* 保证图片铺满 */
+    background-size: cover;
     background-position: center;
     
-    /* 🔴 关键：背景固定不动，这样永远不会因为滚动而露出底部的白条 */
+    /* 🔴 关键：fixed 确保背景图永远填满屏幕，不管内容多少 */
     background-attachment: fixed; 
     background-repeat: no-repeat;
     
+    /* 确保 body 至少有一屏高 */
     min-height: 100vh;
     margin: 0;
     
@@ -29,47 +28,38 @@ body {
     transition: background-image 0.5s ease-in-out;
 }
 
-/* 夜间模式背景 */
+/* 夜间模式背景图 */
 html.dark body,
 body.dark {
     background-image: url('/images/background-dark.jpg') !important;
 }
 
-/* 3. 内容布局容器 */
+/* 3. 布局容器微调 */
+/* Flex 布局已在 default.html 中定义，这里只处理背景过渡 */
 #main-content-wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    
-    /* 初始透明，等待 JS 滚动变色 */
     background-color: rgba(255, 255, 255, 0);
     transition: background-color 0.1s linear;
 }
 
-/* 正文区域 */
+/* 正文区域宽度限制 */
 .main-content-inner {
-    flex: 1; /* 撑开高度，把footer挤下去 */
     padding: 2em;
     width: 100%;
     max-width: 1280px;
     margin: 0 auto;
 }
 
-/* 4. 夜间模式特殊处理 */
-/* 只有夜间模式需要单独把导航栏变成全透明，因为日间模式我们在 _masthead.scss 里定义了毛玻璃 */
-html.dark .masthead,
-body.dark .masthead {
-    background: transparent !important;
-    backdrop-filter: none !important;
-}
-
-/* 5. 侧边栏与文字修正 */
+/* 4. 侧边栏与文字修正 */
 .author__avatar { display: none !important; }
 
 .author__name {
     font-size: 1.8em !important;
     font-weight: bold;
     margin-bottom: 10px;
+}
+
+h1, h2, h3, h4, h5, h6, .page__title {
+    color: #ffffff !important;
 }
 
 h1, h2, h3, h4, h5, h6, .page__title {
