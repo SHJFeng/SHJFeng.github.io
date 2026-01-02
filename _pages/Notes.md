@@ -1,5 +1,4 @@
 ---
-layout: archive
 title: "Expository Notes"
 permalink: /notes/
 author_profile: false
