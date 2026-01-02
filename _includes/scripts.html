@@ -7,57 +7,72 @@ document.addEventListener("DOMContentLoaded", function() {
     const toggleBtn = document.getElementById("theme-toggle");
     const themeIcon = document.getElementById("theme-icon");
     const contentWrapper = document.getElementById("main-content-wrapper");
-    //  关键：获取 html 标签
     const htmlEl = document.documentElement;
     const bodyEl = document.body;
 
-    // --- A. 初始化状态同步 ---
-    // 因为 head 里已经设置了 html 的 class，这里主要是同步图标和 body
+    // --- 1. 初始化检查 ---
     if (htmlEl.classList.contains("dark") || localStorage.getItem("theme") === "dark") {
-        htmlEl.classList.add("dark"); // 确保 html 有
-        bodyEl.classList.add("dark"); // body 也加上（双重保险）
+        htmlEl.classList.add("dark");
+        bodyEl.classList.add("dark");
         if(themeIcon) { themeIcon.classList.remove("fa-sun"); themeIcon.classList.add("fa-moon"); }
     }
 
-    // --- B. 滚动特效 (保持不变) ---
+    // --- 2. 恢复：滚动特效逻辑 ---
     function updateBackground() {
         if (!contentWrapper) return;
+        
         var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        var opacity = Math.min(scrollTop / 500, 0.95);
-        // 判断依据：查 html 标签
+        // 滚动 500px 后达到最大效果
+        var progress = Math.min(scrollTop / 500, 1.0); 
         var isDark = htmlEl.classList.contains("dark");
 
         if (isDark) {
-            contentWrapper.style.backgroundColor = "rgba(0, 0, 0, " + opacity + ")";
-            contentWrapper.style.backdropFilter = "blur(" + (opacity * 15) + "px)"; 
+            // 【夜间模式特效】
+            // 如果你想夜间完全透明，把下面的 0.95 改成 0，把 blur 改成 0
+            // 这里默认：随着滚动，变黑幕(0.95透明度) + 强虚化(15px)
+            contentWrapper.style.backgroundColor = "rgba(0, 0, 0, " + (progress * 0.95) + ")";
+            contentWrapper.style.backdropFilter = "blur(" + (progress * 15) + "px)";
+            contentWrapper.style.webkitBackdropFilter = "blur(" + (progress * 15) + "px)";
         } else {
-            contentWrapper.style.backgroundColor = "rgba(255, 255, 255, " + opacity + ")";
-            contentWrapper.style.backdropFilter = "blur(" + (opacity * 10) + "px)";
+            // 【日间模式特效】
+            // 随着滚动，变白雾(0.95透明度) + 虚化(10px)
+            contentWrapper.style.backgroundColor = "rgba(255, 255, 255, " + (progress * 0.95) + ")";
+            contentWrapper.style.backdropFilter = "blur(" + (progress * 10) + "px)";
+            contentWrapper.style.webkitBackdropFilter = "blur(" + (progress * 10) + "px)";
         }
     }
+
+    // 绑定滚动事件
     window.addEventListener("scroll", updateBackground);
+    // 初始化执行一次，防止刷新时位置不对
     updateBackground();
 
-    // --- C. 点击切换逻辑 (同步切换 html 和 body) ---
+    // --- 3. 点击切换逻辑 ---
     if (toggleBtn) {
         toggleBtn.addEventListener("click", function(e) {
             e.preventDefault();
-            
-            //  同时切换两个地方
             htmlEl.classList.toggle("dark");
             bodyEl.classList.toggle("dark");
-            
-            var isDark = htmlEl.classList.contains("dark");
 
-            if (isDark) {
+            if (htmlEl.classList.contains("dark")) {
                 localStorage.setItem("theme", "dark");
                 if(themeIcon) { themeIcon.classList.remove("fa-sun"); themeIcon.classList.add("fa-moon"); }
             } else {
                 localStorage.setItem("theme", "light");
                 if(themeIcon) { themeIcon.classList.remove("fa-moon"); themeIcon.classList.add("fa-sun"); }
             }
+            
+            // 切换主题后立刻更新一次背景，不用等滚动
             updateBackground();
         });
     }
 });
 </script>
+
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+    options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
