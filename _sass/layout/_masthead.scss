@@ -1,33 +1,39 @@
 /* ==========================================================================
-   MASTHEAD
+   MASTHEAD (Navigation Source)
    ========================================================================== */
 
 .masthead {
+  /* 1. 外层设置：负责全屏宽度、毛玻璃背景 */
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 100%; /* 确保占据整个屏幕宽度（你想要的最长的框） */
   z-index: 20;
   height: $masthead-height;
 
-  /* 1. 源头修改：去除边框 */
-  border-bottom: none; 
-
-  /* 2. 源头修改：设置基础毛玻璃 (日间模式) */
-  /* 使用较低的透明度 (0.2) 以便让背景透出来，而不是变成实心白 */
+  /* 日间模式背景：半透明白 + 模糊 */
   background: rgba(255, 255, 255, 0.2); 
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+
+  /* 去掉外层边框 */
+  border-bottom: none; 
 
   -webkit-animation: intro 0.3s both;
           animation: intro 0.3s both;
   -webkit-animation-delay: 0.15s;
           animation-delay: 0.15s;
 
+  /* 2. 内层设置：只负责文字居中，不显示背景和边框 */
   &__inner-wrap {
-    @include container;
+    @include container; /* 这个混合宏控制了内容的宽度（中间的内容区） */
     @include clearfix;
     padding: 1em;
     font-family: $sans-serif-narrow;
+
+    /* 🔴 关键修改：让内层完全透明，消除“中间的方框” */
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
 
     @include breakpoint($x-large) {
       max-width: $x-large;
@@ -53,10 +59,11 @@
 }
 
 .masthead__menu-item {
-  background-color: transparent; 
   display: block;
   list-style-type: none;
   white-space: nowrap;
+  /* 确保菜单项本身也没有背景色 */
+  background-color: transparent !important; 
 
   &--lg {
     padding-right: 2em;
