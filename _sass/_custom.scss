@@ -1,0 +1,40 @@
+/* ========================
+   自定义布局与背景图设置
+   ======================== */
+
+/* 1. 日间模式背景 (默认) */
+body {
+    background-image: url('/images/background.jpg'); /* 白天图 */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    transition: background-image 0.5s ease-in-out; /* 切换时的平滑过渡 */
+}
+
+/* 2. 夜间模式背景 (切换后) */
+body.dark {
+    /* 只需要在这里覆盖背景图即可，建议准备一张 darker 的图 */
+    background-image: url('/images/background-dark.jpg') !important; 
+}
+
+/* 3. 布局修正 */
+.author__avatar { display: none !important; } /* 隐藏侧边栏头像 */
+
+/* 4. 初始透明设置 (为了配合 JS 滚动特效) */
+#main-content-wrapper {
+    background-color: rgba(255, 255, 255, 0); /* 初始完全透明 */
+    transition: background-color 0.2s ease-out;
+    border-radius: 8px;
+    padding: 2em;
+    min-height: 100vh;
+}
+
+/* 5. 导航栏样式 (日间) */
+.masthead, .masthead__inner-wrap {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: none;
+    box-shadow: none;
+}
