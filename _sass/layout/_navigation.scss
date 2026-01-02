@@ -190,14 +190,22 @@
     }
   }
 
-  button {
+ button {
     position: absolute;
     height: 2.5rem;
     right: 0;
     padding: 0 0.5rem;
     border: 0;
     outline: none;
-    background-color: var(--global-base-color);
+    
+    /* 🔴 1. 日间模式：改为淡白毛玻璃 */
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    /* 稍微加点圆角，手感更好 */
+    border-radius: 4px;
+    
     color: #fff;
     cursor: pointer;
     z-index: 100;
@@ -317,6 +325,14 @@ body.dark .hidden-links {
       background-color: rgba(255, 255, 255, 0.05);
     }
   }
+}
+/* 🔴 3. 汉堡按钮夜间模式适配 */
+html.dark .greedy-nav button,
+body.dark .greedy-nav button {
+  /* 夜间模式：改为黑色毛玻璃 */
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 /*
