@@ -1,51 +1,99 @@
 /* ==========================================================================
-   Custom Layout Fixes
+   Custom Layout Fixes (Final Polished Version)
    ========================================================================== */
 
-/* 1. 根标签设置 ( 核心：解决底部白条问题) */
-/* 必须给 html 设置背景色，否则背景图之外的区域默认是白色的 */
+/* 1. 根标签与背景图 */
 html {
-    background-color: #ffffff; /* 日间模式底色 */
+    background-color: #ffffff; /* 日间底色 */
     height: 100%;
 }
 html.dark {
-    background-color: #1a1a1a; /* 夜间模式底色 (解决白条) */
+    background-color: #1a1a1a; /* 夜间底色 */
 }
 
-/* 2. Body 背景图设置 */
 body {
     background-image: url('/images/background.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
-    transition: background-image 0.5s ease-in-out;
+    /*  确保 body 至少占满一屏 */
     min-height: 100vh;
-    color: #ffffff !important; /* 强制白字 */
+    margin: 0;
+    
+    color: #ffffff !important;
+    transition: background-image 0.5s ease-in-out;
 }
 
-/* 夜间模式背景图 */
+/* 夜间模式背景 */
 html.dark body,
 body.dark {
     background-image: url('/images/background-dark.jpg') !important;
 }
 
-/* 确保标题在任何时候都是白色 */
-h1, h2, h3, h4, h5, h6, .page__title {
-    color: #ffffff !important;
-}
-
-/* 3. 内容容器 ( 恢复：初始透明，等待 JS 滚动变色) */
+/* 2. 布局容器 ( 核心：Sticky Footer 修复) */
 #main-content-wrapper {
-    background-color: rgba(255, 255, 255, 0); /* 初始全透明 */
-    border-radius: 8px;
-    padding: 2em;
+    /* 开启 Flexbox */
+    display: flex;
+    flex-direction: column;
+    /* 让容器至少占满屏幕高度 */
     min-height: 100vh;
-    /* 只保留颜色的过渡，毛玻璃交给 JS 实时计算 */
-    transition: background-color 0.1s linear; 
+    
+    /* 初始背景设置 */
+    background-color: rgba(255, 255, 255, 0);
+    transition: background-color 0.1s linear;
 }
 
-/* 4. 侧边栏修正 */
+/* 新增：正文区域自动伸展，把 footer 挤到最下面 */
+.main-content-inner {
+    flex: 1; /* 占据剩余所有空间 */
+    padding: 2em; /* 保持原有的内边距 */
+    
+    /* 配合之前的 layout/base 修复，这里不要加背景色 */
+}
+
+
+/* 3. 导航栏样式 ( 核心：毛玻璃 + 去边框) */
+.masthead, .masthead__inner-wrap {
+    /* 日间模式：半透明白 + 模糊 */
+    background-color: rgba(255, 255, 255, 0.2) !important; /* 调整透明度 */
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    
+    /* 强制去掉边框和阴影 */
+    border: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
+
+/* 导航栏链接颜色 */
+.masthead__menu-item a {
+    color: #ffffff !important; 
+    font-weight: 700;
+}
+/* 鼠标悬停变色 */
+.masthead__menu-item a:hover {
+    color: #87ceeb !important;
+}
+
+
+/* 4. 夜间模式特殊处理 */
+html.dark .masthead,
+body.dark .masthead {
+    /* 夜间模式导航栏：全透明，无模糊 (根据你的需求) */
+    background: transparent !important;
+    backdrop-filter: none !important;
+}
+
+/* 夜间模式内容区域：全透明 */
+html.dark #main-content-wrapper,
+body.dark #main-content-wrapper {
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+}
+
+
+/* 5. 侧边栏修正 */
 .author__avatar { display: none !important; }
 .author__name {
     font-size: 1.8em !important;
@@ -53,11 +101,7 @@ h1, h2, h3, h4, h5, h6, .page__title {
     margin-bottom: 10px;
 }
 
-/* 5. 导航栏样式 (保持一致性) */
-.masthead, .masthead__inner-wrap {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: none;
-    box-shadow: none;
+/* 6. 全局文字修正 */
+h1, h2, h3, h4, h5, h6, .page__title {
+    color: #ffffff !important;
 }
