@@ -1,46 +1,43 @@
 ---
 ---
-/*
- * 这里的逻辑是：
- * 1. 显式加载 theme/default_light (亮色基础)
- * 2. 显式加载 theme/default_dark (夜间模式)
- * 3. 加载其他核心库
- * 4. 最后加载 custom (你的补丁)
- */
+/* ==========================================================================
+   Main SCSS Manifest
+   ========================================================================== */
 
-@import
-    "vendor/breakpoint/breakpoint",
-    "themes",
-    
-    /* 1. 必须对应文件: _sass/theme/_default_light.scss */
-    "theme/default_light",
-    
-    /* 2. 必须对应文件: _sass/theme/_default_dark.scss */
-    "theme/default_dark", 
+/* 1. 引入核心工具 */
+@import "vendor/breakpoint/breakpoint";
+@import "themes";
 
-    "include/mixins",
-    "vendor/susy/susy",
-    "layout/reset",
-    "layout/base",
-    "include/utilities",
-    "layout/tables",
-    "layout/buttons",
-    "layout/notices",
-    "layout/masthead",
-    "layout/navigation",
-    "layout/footer",
-    "syntax",
-    "layout/forms",
-    "layout/page",
-    "layout/archive",
-    "layout/sidebar",
-    "layout/json_cv",
-    "vendor/font-awesome/fontawesome",
-    "vendor/font-awesome/solid",
-    "vendor/font-awesome/brands",
-    "vendor/magnific-popup/magnific-popup",
+/* 2. 引入主题文件 (关键部分) */
+/* 这里的顺序很重要：先引入默认(亮色)，再引入夜间模式 */
+@import "theme/default_light";
+@import "theme/default_dark";
 
-    /* 3.  必须对应文件: _sass/_custom.scss */
-    /* Jekyll 默认会去 _sass/ 目录下找 _custom.scss，所以直接写 custom */
-    "custom"
-;
+/* 3. 引入布局和组件库 */
+@import "include/mixins";
+@import "vendor/susy/susy";
+@import "layout/reset";
+@import "layout/base";
+@import "include/utilities";
+@import "layout/tables";
+@import "layout/buttons";
+@import "layout/notices";
+@import "layout/masthead";
+@import "layout/navigation";
+@import "layout/footer";
+@import "syntax";
+@import "layout/forms";
+@import "layout/page";
+@import "layout/archive";
+@import "layout/sidebar";
+@import "layout/json_cv";
+
+/* 4. 引入第三方图标库 */
+@import "vendor/font-awesome/fontawesome";
+@import "vendor/font-awesome/solid";
+@import "vendor/font-awesome/brands";
+@import "vendor/magnific-popup/magnific-popup";
+
+/* 5. 引入你的自定义补丁 */
+/* 对应文件: _sass/_custom.scss */
+@import "custom";
