@@ -1,18 +1,22 @@
 ---
 ---
 /*
- * 这里的逻辑是：加载默认主题 -> 加载你的 dark 文件 -> 加载布局补丁
+ * 这里的逻辑是：
+ * 1. 加载原版 Light 主题 (作为默认的基础颜色变量，防止报错)
+ * 2. 加载你的 Dark 主题 (作为可选的夜间模式)
+ * 3. 加载布局补丁
  */
 
 @import
     "vendor/breakpoint/breakpoint",
     "themes",
     
-    /* 1. 引入默认(亮色)主题 */
-    "theme/{{ site.site_theme | default: 'default' }}",
+    /* 修复点 1：必须加上 append: '_light'，否则找不到文件 */
+    /* 这会去加载 _sass/theme/_default_light.scss，为网站提供基础变量 */
+    "theme/{{ site.site_theme | default: 'default' | append: '_light' }}",
     
-    /* 2. 修正：直接引入你想要的 'dark' 文件 */
-    /* 这会去加载 _sass/theme/_dark.scss */
+    /* 修复点 2：引入你新建的 _dark.scss */
+    /* 这会去加载 _sass/theme/_dark.scss，用于 JS 切换夜间模式 */
     "theme/dark", 
 
     "include/mixins",
