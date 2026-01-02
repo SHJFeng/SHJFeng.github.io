@@ -68,17 +68,10 @@
   display: block;
   list-style-type: none;
   white-space: nowrap;
-  background-color: transparent !important;
-&--lg {
+  background-color: transparent !important; 
+
+  &--lg {
     padding-right: 2em;
     font-weight: 700;
-    
-    /* 这里是关键：只在 768px 以下的屏幕（手机/竖屏平板）变大 */
-    @media (max-width: 768px) {
-      font-size: 1.3em !important; /* 你可以把 1.3 改成 1.5 或更大 */
-      padding-right: 1em; /* 手机上右边距稍微改小一点，防止太挤 */
-    }
-    
-    /* 电脑端保持默认大小（不写 font-size 就会继承默认值） */
   }
 }
