@@ -1,54 +1,47 @@
 /* ==========================================================================
-   Masthead Final Refinement
+   Masthead Fix (Respecting Original Source)
    ========================================================================== */
 
-.masthead {
-  /* 确保整个导航栏背景是毛玻璃，且内部文字统一 */
-  
-  .greedy-nav {
-    display: flex;
-    align-items: center;
+/* 1. 强制导航栏所有文字/图标为白色 (源头覆盖蓝色) */
+.masthead__menu-item {
+  a {
+    color: #ffffff !important;
+    opacity: 1;
     
-    .visible-links {
-      display: flex;
-      width: 100%; /* 撑满容器 */
-      align-items: center;
-      
-      li {
-        /* 🔴 修正一：强制白天模式导航栏文字为白色 */
-        a {
-          color: #ffffff !important; 
-          text-decoration: none;
-          transition: opacity 0.2s;
-
-          &:hover {
-            opacity: 0.8;
-            color: #ffffff !important;
-          }
-        }
-      }
+    &:hover {
+      color: #5ab1ff !important; /* 悬停变为浅蓝 */
     }
   }
 }
 
-/* 🔴 修正二：按钮位置与间距 */
+/* 2. 修正按钮位置：只给最后一个按钮一点左边距，让它在右侧保持距离 */
 #theme-toggle {
-  /* margin-left: auto 会将该元素推向父容器的最右侧 */
-  margin-left: auto !important; 
-  padding-right: 5px; /* 留一点点距离，不贴死边缘 */
+  margin-left: 1.5em; /* 调整它与左侧菜单的距离 */
   
   a {
-    display: flex;
-    align-items: center;
+    padding: 0 0.5em; /* 增加点击区域 */
   }
 }
 
-/* 🔴 修正三：解决整体向左移动的问题 */
-/* 确保标题和第一个链接之间有正常的间距 */
-.masthead__menu-item--lg {
-  margin-right: 1.5em; /* 名字右侧留出空间 */
+/* 3. 汉堡菜单 (手机端下拉栏) 修正 */
+/* 仅针对手机端下拉框背景，不影响电脑端布局 */
+.hidden-links {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+  border: none !important;
+
+  /* 下拉菜单里的文字也要白色 */
+  li a {
+    color: #ffffff !important;
+  }
 }
 
+/* 夜间模式下汉堡菜单背景 */
+html.dark .hidden-links,
+body.dark .hidden-links {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+}
 /* 夜间模式适配：确保文字依然是白色 */
 html.dark .masthead .greedy-nav .visible-links li a {
   color: #ffffff !important;
