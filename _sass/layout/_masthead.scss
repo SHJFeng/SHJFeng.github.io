@@ -34,3 +34,18 @@
     color: #ffffff !important;
   }
 }
+/* 确保按钮和名字之间的间距平衡 */
+#theme-toggle {
+  margin-right: 0.2em; /* 调整图标与名字的距离 */
+  vertical-align: middle;
+}
+
+/* 针对 greedy-nav 的特殊修正：防止按钮被误判为可折叠项 */
+.greedy-nav .visible-links li:first-child {
+  display: inline-block !important;
+}
+
+/* 既然你已经写好了手机端下拉背景，确保 .hidden-links 的 z-index 足够高 */
+.hidden-links {
+  z-index: 99;
+}
