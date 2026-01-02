@@ -1,19 +1,21 @@
 ---
 ---
 /* ==========================================================================
-   Main SCSS Manifest
+   Main SCSS Manifest (Safe Version)
    ========================================================================== */
 
-/* 1. 引入核心工具 */
+/* 1. 核心工具 */
 @import "vendor/breakpoint/breakpoint";
 @import "themes";
 
-/* 2. 引入主题文件 (关键部分) */
-/* 这里的顺序很重要：先引入默认(亮色)，再引入夜间模式 */
+/* 2. 主题文件 (分行写，防止编译器报错) */
+/* 这里的 theme/default_light 对应 _sass/theme/_default_light.scss */
 @import "theme/default_light";
+
+/* 这里的 theme/default_dark 对应 _sass/theme/_default_dark.scss */
 @import "theme/default_dark";
 
-/* 3. 引入布局和组件库 */
+/* 3. 布局与组件 */
 @import "include/mixins";
 @import "vendor/susy/susy";
 @import "layout/reset";
@@ -32,12 +34,12 @@
 @import "layout/sidebar";
 @import "layout/json_cv";
 
-/* 4. 引入第三方图标库 */
+/* 4. 第三方库 */
 @import "vendor/font-awesome/fontawesome";
 @import "vendor/font-awesome/solid";
 @import "vendor/font-awesome/brands";
 @import "vendor/magnific-popup/magnific-popup";
 
-/* 5. 引入你的自定义补丁 */
-/* 对应文件: _sass/_custom.scss */
+/* 5. 你的补丁文件 */
+/* 这里对应 _sass/_custom.scss */
 @import "custom";
