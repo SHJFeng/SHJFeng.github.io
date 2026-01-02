@@ -1,23 +1,27 @@
 /* ==========================================================================
-   Custom Layout Fixes (Final Polished Version)
+   Custom Global Settings
    ========================================================================== */
 
-/* 1. 根标签与背景图 */
+/* 1. 根标签 (HTML) */
+/* 这里设置颜色是为了防止图片加载失败时显示默认白，但在正常情况下不应被看到 */
 html {
-    background-color: #ffffff; /* 日间底色 */
+    background-color: #ffffff; 
     height: 100%;
 }
 html.dark {
-    background-color: #1a1a1a; /* 夜间底色 */
+    background-color: #1a1a1a;
 }
 
+/* 2. Body 背景图设置 (解决白条的核心) */
 body {
     background-image: url('/images/background.jpg');
-    background-size: cover;
+    background-size: cover;      /* 保证图片铺满 */
     background-position: center;
-    background-attachment: fixed;
+    
+    /* 🔴 关键：背景固定不动，这样永远不会因为滚动而露出底部的白条 */
+    background-attachment: fixed; 
     background-repeat: no-repeat;
-    /*  确保 body 至少占满一屏 */
+    
     min-height: 100vh;
     margin: 0;
     
@@ -31,77 +35,43 @@ body.dark {
     background-image: url('/images/background-dark.jpg') !important;
 }
 
-/* 2. 布局容器 ( 核心：Sticky Footer 修复) */
+/* 3. 内容布局容器 */
 #main-content-wrapper {
-    /* 开启 Flexbox */
     display: flex;
     flex-direction: column;
-    /* 让容器至少占满屏幕高度 */
     min-height: 100vh;
     
-    /* 初始背景设置 */
+    /* 初始透明，等待 JS 滚动变色 */
     background-color: rgba(255, 255, 255, 0);
     transition: background-color 0.1s linear;
 }
 
-/* 新增：正文区域自动伸展，把 footer 挤到最下面 */
+/* 正文区域 */
 .main-content-inner {
-    flex: 1; /* 占据剩余所有空间 */
-    padding: 2em; /* 保持原有的内边距 */
-    
-    /* 配合之前的 layout/base 修复，这里不要加背景色 */
+    flex: 1; /* 撑开高度，把footer挤下去 */
+    padding: 2em;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
 }
-
-
-/* 3. 导航栏样式 ( 核心：毛玻璃 + 去边框) */
-.masthead, .masthead__inner-wrap {
-    /* 日间模式：半透明白 + 模糊 */
-    background-color: rgba(255, 255, 255, 0.2) !important; /* 调整透明度 */
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    
-    /* 强制去掉边框和阴影 */
-    border: none !important;
-    border-bottom: none !important;
-    box-shadow: none !important;
-}
-
-/* 导航栏链接颜色 */
-.masthead__menu-item a {
-    color: #ffffff !important; 
-    font-weight: 700;
-}
-/* 鼠标悬停变色 */
-.masthead__menu-item a:hover {
-    color: #87ceeb !important;
-}
-
 
 /* 4. 夜间模式特殊处理 */
+/* 只有夜间模式需要单独把导航栏变成全透明，因为日间模式我们在 _masthead.scss 里定义了毛玻璃 */
 html.dark .masthead,
 body.dark .masthead {
-    /* 夜间模式导航栏：全透明，无模糊 (根据你的需求) */
     background: transparent !important;
     backdrop-filter: none !important;
 }
 
-/* 夜间模式内容区域：全透明 */
-html.dark #main-content-wrapper,
-body.dark #main-content-wrapper {
-    background-color: transparent !important;
-    backdrop-filter: none !important;
-}
-
-
-/* 5. 侧边栏修正 */
+/* 5. 侧边栏与文字修正 */
 .author__avatar { display: none !important; }
+
 .author__name {
     font-size: 1.8em !important;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-/* 6. 全局文字修正 */
 h1, h2, h3, h4, h5, h6, .page__title {
     color: #ffffff !important;
 }
