@@ -1,203 +1,42 @@
 ---
 ---
 /*
- * This file controls what is imported from /_sass
- *
- * Note that the files are processed in the order they are imported, so they are partly
-   sorted by the dependencies. Also, the first two lines of the file are required by Jekyll.
+ * 这里的逻辑是：加载默认主题 -> 加载你的 dark 文件 -> 加载布局补丁
  */
-/* ==========================================================================
-   1. 核心模块引入 (不要动这部分，否则样式会崩)
-   ========================================================================== */
-@import "vendor/breakpoint/breakpoint";
-@import "themes";
-@import "theme/{{ site.site_theme | default: 'default' }}";
-@import "include/mixins";
-@import "vendor/susy/susy";
-@import "layout/reset";
-@import "layout/base";
-@import "include/utilities";
-@import "layout/tables";
-@import "layout/buttons";
-@import "layout/notices";
-@import "layout/masthead";
-@import "layout/navigation";
-@import "layout/footer";
-@import "syntax";
-@import "layout/forms";
-@import "layout/page";
-@import "layout/archive";
-@import "layout/sidebar";
-@import "vendor/font-awesome/fontawesome";
-@import "vendor/font-awesome/solid";
-@import "vendor/font-awesome/brands";
-@import "vendor/magnific-popup/magnific-popup";
 
-/* ==========================================================================
-   SHIJIE FENG - FIXED VERSION (恢复渐变 + 去除白条)
-   ========================================================================== */
+@import
+    "vendor/breakpoint/breakpoint",
+    "themes",
+    
+    /* 1. 引入默认(亮色)主题 */
+    "theme/{{ site.site_theme | default: 'default' }}",
+    
+    /* 2. 修正：直接引入你想要的 'dark' 文件 */
+    /* 这会去加载 _sass/theme/_dark.scss */
+    "theme/dark", 
 
-/* --- 1. 全局基础设置 --- */
-body {
-    background-image: url('/images/background.jpg'); /* 确保路径对 */
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    /* 全局文字白色 */
-    color: #ffffff !important;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8); /* 稍微减弱阴影，防止Sitemap模糊 */
-}
+    "include/mixins",
+    "vendor/susy/susy",
+    "layout/reset",
+    "layout/base",
+    "include/utilities",
+    "layout/tables",
+    "layout/buttons",
+    "layout/notices",
+    "layout/masthead",
+    "layout/navigation",
+    "layout/footer",
+    "syntax",
+    "layout/forms",
+    "layout/page",
+    "layout/archive",
+    "layout/sidebar",
+    "layout/json_cv",
+    "vendor/font-awesome/fontawesome",
+    "vendor/font-awesome/solid",
+    "vendor/font-awesome/brands",
+    "vendor/magnific-popup/magnific-popup",
 
-/* 让所有默认容器透明，不挡背景 */
-.page, .page__content, .archive, .author__urls-wrapper {
-    background-color: transparent !important;
-    box-shadow: none !important;
-}
-
-/* --- 2. 核心：恢复 JS 渐变控制 (关键修改) --- */
-/* 这里千万不要加 background-color !important，否则 JS 就废了 */
-#main-content-wrapper {
-    /* 默认透明，等着 JS 来给它上色 */
-    background-color: rgba(0, 0, 0, 0); 
-    padding: 2em;
-    border-radius: 8px;
-    transition: background-color 0.1s ease-out; 
-    min-height: 100vh;
-}
-
-/* --- 3. 顶部导航栏 (Masthead) 强力去白 --- */
-/* 必须同时穿透外层 (.masthead) 和内层 (.masthead__inner-wrap) */
-.masthead, 
-.masthead__inner-wrap {
-    background-color: rgba(255, 255, 255, 0.1) !important; /* 10%透明度的微白 */
-    background: rgba(255, 255, 255, 0.1) !important;       /* 双重保险 */
-    border: none !important;
-    box-shadow: none !important;
-    backdrop-filter: blur(10px); /* 毛玻璃 */
-    -webkit-backdrop-filter: blur(10px);
-}
-
-.masthead {
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
-}
-
-/* 导航栏文字 */
-.masthead__menu-item a {
-    color: #ffffff !important;
-    font-weight: 700;
-}
-.masthead__menu-item a:hover {
-    color: #87ceeb !important;
-}
-
-/* --- 4. 底部 Footer 强力去白 --- */
-.page__footer, 
-.page__footer footer, 
-.page__footer-copyright {
-    background-color: transparent !important;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-}
-.page__footer-copyright {
-    color: rgba(255, 255, 255, 0.5) !important;
-    text-shadow: none !important; /* 去掉底部的阴影防止模糊 */
-}
-
-/* --- 5. 侧边栏与文字修复 (已修改为响应式) --- */
-.sidebar__content {
-    position: relative;
-    /* 1. 默认设置（针对手机端）：去除巨大的顶部留白 */
-    padding-top: 10px !important; 
-}
-
-/* 2. 针对电脑端（屏幕宽度大于 1024px）：才加上 140px 改为了100的避让距离 */
-@media screen and (min-width: 1024px) {
-    .sidebar__content {
-        padding-top: 100px !important; /* 避开电脑端的导航栏 */
-    }
-}
-
-.sidebar {
-    background: transparent !important;
-    border: none !important;
-    z-index: 10;
-}
-
-/* 名字和头像 */
-.author__name {
-    color: #fff !important;
-    text-shadow: 0 2px 5px rgba(0,0,0,1);
-    font-size: 1.8em !important;
-    margin-top: 10px !important;
-}
-
-/* 如果你没有放照片，为了防止空白框，可以隐藏头像容器或者保留样式但实际上不显示 */
-.author__avatar img {
-    border-radius: 10px !important;
-    border: 2px solid rgba(255,255,255,0.6);
-    /* 如果彻底没照片，且不想显示空框，可以加下面这行：*/
-    /* display: none; */ 
-}
-
-/* 通用文字颜色修正 */
-h1, h2, h3, h4, h5, h6, p, li {
-    color: #ffffff !important;
-}
-a {
-    color: #87ceeb !important;
-    text-decoration: none;
-}
-a:hover {
-    color: #ffffff !important;
-}
-/* ==========================================================================
-   6. 手机端 Header/Hero 终极调整 (Mobile Hero Fix)
-   ========================================================================== */
-@media screen and (max-width: 768px) {
-  
-  /* 1. 区域整体上移 + 变矮 */
-  .page__hero--overlay {
-    /* 核心：把顶部的留白强制改为 0 或很小，这样内容就往上跑了 */
-    padding-top: 30px !important;    /* 留一点空间给汉堡菜单，不要完全贴顶 : 60改为了30*/
-    padding-bottom: 10px !important; /* 底部收紧，把下面的正文拉上来 */
-    min-height: auto !important;     /* 允许高度自动缩小 */
-  }
-  
-  /* 2. 名字 (Shijie Feng)：保持大号，甚至更大 */
-  .page__hero--overlay .page__title {
-    font-size: 2.4em !important;     /* 保持醒目大字体 */
-    margin-top: 0 !important;        /* 去掉名字上方的额外间距 */
-    margin-bottom: 5px !important;   /* 紧贴下面的名言 */
-    line-height: 1.1 !important;
-  }
-
-  /* 3. 名言 (The Quote)：变小、精致 */
-  .page__hero--overlay .page__lead {
-    font-size: 0.85em !important;    /* 缩小字号 (之前可能太大了) */
-    line-height: 1.3 !important;     /* 行间距收紧 */
-    max-width: 90% !important;       /* 宽度限制，防止贴边 */
-    margin-left: auto !important;    /* 居中 */
-    margin-right: auto !important;
-    margin-bottom: 5px !important;   /* 减少和落款的距离 */
-    font-weight: normal !important;  
-    font-style: italic !important;   /* 强制斜体 */
-  }
-  
-  /* 4. 落款 (J.D. Salinger)：变小 */
-  .page__hero--overlay p small {
-    font-size: 0.75em !important;     
-    display: block !important;       
-    margin-top: 0 !important;
-  }
-}
-/* ==========================================================================
-   7. 彻底隐藏侧边栏头像 (Remove Sidebar Avatar)
-   ========================================================================== */
-.author__avatar {
-  display: none !important;
-}
+    /* 3. 引入布局补丁 (Custom Layout Fixes) */
+    "custom"
+;
