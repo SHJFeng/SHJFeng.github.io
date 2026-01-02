@@ -252,67 +252,72 @@
     }
   }
 
-  .hidden-links {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    margin-top: 15px;
-    padding: 5px;
-    border: 1px solid var(--global-border-color);
-    border-radius: $border-radius;
-    /*background: #fff;*/
-    background: rgba(255, 255, 255, 0.9); /* 建议比顶栏稍微不透明一点，保证可读性 */
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 10px rgba(#000, 0.25);
+/* ==========================================================================
+   Mobile Dropdown (Source Modification in _navigation.scss)
+   ========================================================================== */
+
+.hidden-links {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 5px;
+  padding: 5px 0;
+  border-radius: 4px;
+  
+  /* 1. 白天模式核心修改：淡白毛玻璃 */
+  /* 去掉原来的 background: #fff; 或类似的实色代码 */
+  background-color: rgba(255, 255, 255, 0.15) !important; 
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  
+  /* 去掉默认的丑陋边框和阴影 */
+  border: none !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+  
+  z-index: 9999; /* 确保浮在最上层 */
+
+  /* 下拉列表项 */
+  li {
+    display: block;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* 极淡的分割线 */
+
+    &:last-child {
+      border-bottom: none;
+    }
 
     a {
-      margin: 0;
-      padding: 10px 20px;
-      font-size: $type-size-5;
+      display: block;
+      padding: 0.5em 1em;
+      color: #fff !important; /* 强制文字白色 */
+      font-size: $type-size-6;
+      font-weight: bold;
 
       &:hover {
-        color: var(--global-masthead-link-color-hover);
-        background: var(--global-border-color);
-      }
-    }
-
-    &:before {
-      content: "";
-      position: absolute;
-      top: -11px;
-      right: 10px;
-      width: 0;
-      border-style: solid;
-      border-width: 0 10px 10px;
-      border-color: var(--global-border-color) transparent;
-      display: block;
-      z-index: 0;
-    }
-
-    &:after {
-      content: "";
-      position: absolute;
-      top: -10px;
-      right: 10px;
-      width: 0;
-      border-style: solid;
-      border-width: 0 10px 10px;
-      border-color: #fff transparent;
-      display: block;
-      z-index: 1;
-    }
-
-    li {
-      display: block;
-      border-bottom: 1px solid var(--global-border-color);
-
-      &:last-child {
-        border-bottom: none;
+        color: #fff;
+        background-color: rgba(255, 255, 255, 0.1); /* 悬停微亮 */
       }
     }
   }
 }
 
+/* 2. 夜间模式核心修改：黑色毛玻璃 */
+/* 在 _navigation.scss 里，如果 body.dark 没定义，我们需要显式加上 */
+html.dark .hidden-links,
+body.dark .hidden-links {
+  background-color: rgba(0, 0, 0, 0.6) !important; /* 半透明黑 */
+  border: none !important;
+
+  li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  li a {
+    color: #fff !important;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+  }
+}
 
 /*
    Navigation list
