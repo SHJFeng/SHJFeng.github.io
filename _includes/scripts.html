@@ -17,34 +17,32 @@ document.addEventListener("DOMContentLoaded", function() {
         if(themeIcon) { themeIcon.classList.remove("fa-sun"); themeIcon.classList.add("fa-moon"); }
     }
 
-    // --- 2. 恢复：滚动特效逻辑 ---
+    // --- 2. 滚动特效逻辑 (已修改：日间模式只变模糊，不便白) ---
     function updateBackground() {
         if (!contentWrapper) return;
         
         var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        // 滚动 500px 后达到最大效果
         var progress = Math.min(scrollTop / 500, 1.0); 
         var isDark = htmlEl.classList.contains("dark");
 
         if (isDark) {
-            // 【夜间模式特效】
-            // 如果你想夜间完全透明，把下面的 0.95 改成 0，把 blur 改成 0
-            // 这里默认：随着滚动，变黑幕(0.95透明度) + 强虚化(15px)
-            contentWrapper.style.backgroundColor = "rgba(0, 0, 0, " + (progress * 0.95) + ")";
+            // 【夜间模式】
+            // 变黑 + 强模糊
+            contentWrapper.style.backgroundColor = "rgba(0, 0, 0, " + (progress * 0.8) + ")";
             contentWrapper.style.backdropFilter = "blur(" + (progress * 15) + "px)";
             contentWrapper.style.webkitBackdropFilter = "blur(" + (progress * 15) + "px)";
         } else {
-            // 【日间模式特效】
-            // 随着滚动，变白雾(0.95透明度) + 虚化(10px)
-            contentWrapper.style.backgroundColor = "rgba(255, 255, 255, " + (progress * 0.95) + ")";
-            contentWrapper.style.backdropFilter = "blur(" + (progress * 10) + "px)";
-            contentWrapper.style.webkitBackdropFilter = "blur(" + (progress * 10) + "px)";
+            // 【日间模式】(🔴 核心修改)
+            // 1. 透明度：最高只到 0.15 (15%的白)，保持极高通透感，绝不变白纸
+            // 2. 模糊度：最高到 15px (磨砂感)
+            contentWrapper.style.backgroundColor = "rgba(255, 255, 255, " + (progress * 0.15) + ")";
+            contentWrapper.style.backdropFilter = "blur(" + (progress * 15) + "px)";
+            contentWrapper.style.webkitBackdropFilter = "blur(" + (progress * 15) + "px)";
         }
     }
 
     // 绑定滚动事件
     window.addEventListener("scroll", updateBackground);
-    // 初始化执行一次，防止刷新时位置不对
     updateBackground();
 
     // --- 3. 点击切换逻辑 ---
@@ -62,7 +60,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 if(themeIcon) { themeIcon.classList.remove("fa-moon"); themeIcon.classList.add("fa-sun"); }
             }
             
-            // 切换主题后立刻更新一次背景，不用等滚动
             updateBackground();
         });
     }
