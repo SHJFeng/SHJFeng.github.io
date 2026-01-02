@@ -10,7 +10,7 @@
     {% include head/custom.html %}
   </head>
 
-  <body>
+<body class="{% unless page.author_profile or layout.author_profile %}no-sidebar{% endunless %}">
 
     {% include browser-upgrade.html %}
     {% include masthead.html %}
