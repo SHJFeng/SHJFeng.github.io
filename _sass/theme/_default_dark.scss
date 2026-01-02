@@ -1,67 +1,56 @@
 /* ==========================================================================
-   DARK THEME (Toggleable)
+   DARK THEME (Source Fixed)
    ========================================================================== */
 
-/* 1. 定义颜色变量 (这些保持不变，作为调色板) */
-$gray:                      #7a8288;
-$dark-gray:                 mix(#000, $gray, 40%);
-$darker-gray:               mix(#000, $gray, 60%);
-$light-gray:                mix(#fff, $gray, 50%);
+$d-gray: #7a8288;
+$d-bg:   #1a1a1a;
+$d-text: #ffffff;
+$d-link: #5ab1ff;
+$d-link-hover: mix(#fff, $d-link, 20%);
+$d-code-bg:    #2a2a2a;
 
-$background:                #1a1a1a; /* 我稍微改深了一点，原版 #474747 可能太亮了，你可以改回 */
-$background-light:          mix(#fff, $background, 80%);
-$background-lighter:        mix(#fff, $background, 90%);
-$text:                      #ffffff;
-$link:                      #5ab1ff; /* 亮蓝色，适合深色背景 */
-$link-dark:                 mix(#000, $link, 25%);
-$link-light:                mix(#fff, $link, 25%);
-
-/* 2. 核心修改：将 :root 改为 body.dark */
-/* 只有当 body 有 class="dark" 时，才覆盖全局 CSS 变量 */
+/* 核心修改：支持 html.dark (防闪烁) 和 body.dark (兼容旧逻辑) */
+html.dark body, 
 body.dark {
-    --global-base-color:                #{$background};
-    --global-bg-color:                  #{$background};
-    --global-border-color:              #{$background-light};
-    --global-code-background-color:     #2a2a2a; /* 代码块背景变深 */
+    --global-base-color:                #{$d-bg};
+    --global-bg-color:                  #{$d-bg};
+    --global-border-color:              #333;
+    --global-code-background-color:     #{$d-code-bg};
     --global-code-text-color:           #e6e6e6;
-    --global-fig-caption-color:         #{$light-gray};
-    --global-link-color:                #{$link};
-    --global-link-color-hover:          #{$link-light};
-    --global-link-color-visited:        #{$link-dark};    
-    --global-masthead-link-color:       #{$text};
-    --global-masthead-link-color-hover: #{$link};    
-    --global-text-color:                #{$text};
-    --global-text-color-light:          #{$light-gray};
-    --global-thead-color:               #{$background-lighter};
+    
+    --global-text-color:                #{$d-text};
+    --global-text-color-light:          #aaa;
+    --global-link-color:                #{$d-link};
+    --global-link-color-hover:          #{$d-link-hover};
+    --global-link-color-visited:        #b08dff;
+    
+    --global-masthead-link-color:       #{$d-text};
+    --global-masthead-link-color-hover: #{$d-link};
 
-    /* 3. 强制应用部分样式 (防止部分老旧 CSS 不吃变量) */
-    color: var(--global-text-color) !important;
-    background-color: var(--global-bg-color) !important;
+    /* 强制样式 */
+    color: #{$d-text} !important;
+    background-color: #{$d-bg} !important;
 
-    /* 导航栏去色，适配透明毛玻璃 */
+    a { color: #{$d-link} !important; }
+    a:hover { color: #{$d-link-hover} !important; }
+    
     .masthead {
         background: transparent !important;
         border-bottom: none !important;
     }
-    
-    /* 链接颜色强制覆盖 */
-    a {
-        color: var(--global-link-color) !important;
-    }
-    a:hover {
-        color: var(--global-link-color-hover) !important;
-    }
+    .masthead__menu-item a { color: #{$d-text} !important; }
 
-    /* 表格和代码块适配 */
+    table { color: #e6e6e6; }
     pre, code {
-        background-color: var(--global-code-background-color) !important;
-        color: var(--global-code-text-color) !important;
-        border-color: #444;
+        background-color: #{$d-code-bg} !important;
+        color: #f8f8f2 !important;
+        border: 1px solid #444;
     }
     
-    /* 输入框适配 */
+    h1, h2, h3, h4, h5, h6, .page__title { color: #fff !important; }
+    
     input, textarea {
-        background-color: #333;
+        background: #333;
         color: #fff;
         border: 1px solid #555;
     }
