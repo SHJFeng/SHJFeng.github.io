@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Custom Global Settings (Global 3D Text Shadow)
+   Custom Global Settings (Final Color Tweak)
    ========================================================================== */
 
 /* 1. 根标签 */
@@ -22,8 +22,7 @@ body {
     transition: background-image 0.5s ease-in-out;
 }
 
-/* 🔴 核心修改：全局立体阴影 (无死角覆盖) */
-/* 使用通用选择器，强制给页面上几乎所有文本元素添加阴影 */
+/* 3. 全局立体阴影 (保持不变) */
 body, 
 .masthead, 
 .sidebar, 
@@ -32,43 +31,53 @@ body,
 .author__urls-wrapper,
 h1, h2, h3, h4, h5, h6, 
 p, li, a, span, div, small {
-    /* 阴影参数：X偏移2px Y偏移2px 模糊4px 黑色浓度0.9 */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9) !important;
 }
 
-/* 3. 链接颜色 */
+/* 4. 🔴 链接颜色修改 */
 a {
-    color: #5ab1ff !important;
+    /* 浅蓝色 */
+    color: #82cfff !important; 
     text-decoration: none;
 }
+
 a:hover {
-    color: #8ccbff !important; 
+    /* 🔴 核心修改：悬停时保持颜色不变，不再变白 */
+    color: #82cfff !important; 
+    
+    /* 可选：加个下划线来表示选到了，防止颜色一样看不出反应 */
+    text-decoration: underline !important; 
 }
 
-/* 4. 夜间模式适配 */
+/* 5. 夜间模式适配 */
 html.dark body,
 body.dark {
     background-image: url('/images/background-dark.jpg') !important;
     
-    /* 夜间模式保持阴影，确保文字在深色背景上“浮”起来 */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 1.0) !important;
+    
+    a {
+        color: #82cfff !important;
+    }
+    a:hover {
+        color: #82cfff !important;
+        text-decoration: underline !important;
+    }
 }
 
-/* 5. 标题额外加强 (可选) */
-/* 让大标题的阴影更重一点，制造浮雕感 */
+/* 6. 标题额外加强 */
 h1, h2, h3, h4, h5, h6, .page__title, .author__name {
     text-shadow: 2px 2px 0px rgba(0,0,0,0.6), 0 0 10px rgba(0,0,0,0.8) !important;
 }
 
-/* 6. 侧边栏作者名字 (恢复为原版设置，无手机端特化) */
+/* 7. 侧边栏作者名字 (保持原样) */
 .author__name {
   font-size: 1.8em !important;
   font-weight: bold;
   margin-bottom: 10px;
-  /* 这里去掉了之前的 @media 手机端放大代码 */
 }
 
-/* 7. 布局修正 */
+/* 8. 布局修正 */
 #main-content-wrapper {
     background-color: rgba(255, 255, 255, 0);
     transition: background-color 0.1s linear;
