@@ -1,4 +1,4 @@
-<style>
+{% if page.author_profile or layout.author_profile %}<style>
  /* 手机端（屏幕宽度小于 768px）的特殊处理 */
   @media screen and (max-width: 768px) {
     /* 1. 缩小头像 */
@@ -72,3 +72,4 @@
 
   </div>
 </div>
+{% endif %}
