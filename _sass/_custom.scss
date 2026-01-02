@@ -70,9 +70,17 @@ body.dark {
 
 .author__avatar { display: none !important; }
 .author__name {
+    /* 1. 电脑端 (默认) */
+    /* 保持你之前觉得合适的 1.8em，或者按需调整 */
     font-size: 1.8em !important;
     font-weight: bold;
     margin-bottom: 10px;
+
+    /* 2. 手机端 (核心修改) */
+    /* 当屏幕宽度小于 768px (手机/竖屏平板) 时，执行下面的代码 */
+    @media (max-width: 768px) {
+        font-size: 2.2em !important; /* 这里填比 1.8em 大的数字，比如 2.2em 或 2.5em */
+    }
 }
 h1, h2, h3, h4, h5, h6, .page__title {
     color: #ffffff !important;
