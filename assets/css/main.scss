@@ -1,18 +1,20 @@
 ---
 ---
+@charset "utf-8";
+
 /* ==========================================================================
-   Main SCSS Manifest (Safe Version)
+   Main SCSS Manifest (Fixed)
    ========================================================================== */
 
 /* 1. 核心工具 */
 @import "vendor/breakpoint/breakpoint";
 @import "themes";
 
-/* 2. 主题文件 (分行写，防止编译器报错) */
-/* 这里的 theme/default_light 对应 _sass/theme/_default_light.scss */
+/* 2. 主题文件引入 */
+/* 先加载 Light (基础变量) */
 @import "theme/default_light";
 
-/* 这里的 theme/default_dark 对应 _sass/theme/_default_dark.scss */
+/* 后加载 Dark (夜间模式覆盖) */
 @import "theme/default_dark";
 
 /* 3. 布局与组件 */
@@ -32,7 +34,8 @@
 @import "layout/page";
 @import "layout/archive";
 @import "layout/sidebar";
-@import "layout/json_cv";
+
+/* 🔴 我已经把报错的 @import "layout/json_cv"; 删掉了 */
 
 /* 4. 第三方库 */
 @import "vendor/font-awesome/fontawesome";
@@ -41,5 +44,4 @@
 @import "vendor/magnific-popup/magnific-popup";
 
 /* 5. 你的补丁文件 */
-/* 这里对应 _sass/_custom.scss */
 @import "custom";
