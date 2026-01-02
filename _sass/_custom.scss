@@ -1,66 +1,47 @@
 /* ==========================================================================
-   Custom Global Settings (Colors Tweaked)
+   Custom Global Settings
    ========================================================================== */
 
-/* 1. 根标签 (保持透明) */
+/* 1. 根标签 (HTML) */
+/* 🔴 核心修改：将 HTML 设为透明，防止底部露出白条 */
 html {
     background-color: transparent; 
     height: 100%;
 }
 
-/* 2. Body 设置 (日间模式核心颜色) */
+/* 2. Body 背景图设置 */
 body {
+    /* 你的背景图 */
     background-image: url('/images/background.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    
+    /* 🔴 关键：fixed 确保背景图永远填满屏幕，不管内容多少 */
+    background-attachment: fixed; 
     background-repeat: no-repeat;
+    
+    /* 确保 body 至少有一屏高 */
     min-height: 100vh;
     margin: 0;
     
-    /* 强制白字 */
     color: #ffffff !important;
     transition: background-image 0.5s ease-in-out;
-
-    /* 🔴 要求一：白天模式链接改为浅蓝色 */
-    /* 原来可能是深蓝，现在改为 #5ab1ff (天蓝色) */
-    a {
-        color: #5ab1ff !important;
-        text-decoration: none;
-    }
-    a:hover {
-        color: #8ccbff !important; /* 悬停时更亮一点 */
-    }
-
-    /* 🔴 要求二：Note (小字) 改为浅灰色 */
-    /* 针对 small 标签或 class="small" */
-    small, .small {
-        color: rgba(255, 255, 255, 0.7) !important; /* 浅灰色 */
-    }
 }
 
-/* 3. 夜间模式设置 */
+/* 夜间模式背景图 */
 html.dark body,
 body.dark {
     background-image: url('/images/background-dark.jpg') !important;
-    
-    /* 夜间模式链接保持浅蓝 (或者你可以自己改) */
-    a {
-        color: #5ab1ff !important;
-    }
-    
-    /* 夜间模式 Note 也保持浅灰 */
-    small, .small {
-        color: rgba(255, 255, 255, 0.7) !important;
-    }
 }
 
-/* 4. 其他修正 (保持不变) */
+/* 3. 布局容器微调 */
+/* Flex 布局已在 default.html 中定义，这里只处理背景过渡 */
 #main-content-wrapper {
     background-color: rgba(255, 255, 255, 0);
     transition: background-color 0.1s linear;
 }
 
+/* 正文区域宽度限制 */
 .main-content-inner {
     padding: 2em;
     width: 100%;
@@ -68,12 +49,19 @@ body.dark {
     margin: 0 auto;
 }
 
+/* 4. 侧边栏与文字修正 */
 .author__avatar { display: none !important; }
+
 .author__name {
     font-size: 1.8em !important;
     font-weight: bold;
     margin-bottom: 10px;
 }
+
+h1, h2, h3, h4, h5, h6, .page__title {
+    color: #ffffff !important;
+}
+
 h1, h2, h3, h4, h5, h6, .page__title {
     color: #ffffff !important;
 }
