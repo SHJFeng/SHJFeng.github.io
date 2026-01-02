@@ -1,8 +1,18 @@
 /* ==========================================================================
-   Custom Layout Fixes (Full Config)
+   Custom Layout Fixes
    ========================================================================== */
 
-/* 1. 全局基础设置 (解决问题二：白天模式文字也要白色) */
+/* 1. 根标签设置 ( 核心：解决底部白条问题) */
+/* 必须给 html 设置背景色，否则背景图之外的区域默认是白色的 */
+html {
+    background-color: #ffffff; /* 日间模式底色 */
+    height: 100%;
+}
+html.dark {
+    background-color: #1a1a1a; /* 夜间模式底色 (解决白条) */
+}
+
+/* 2. Body 背景图设置 */
 body {
     background-image: url('/images/background.jpg');
     background-size: cover;
@@ -10,44 +20,40 @@ body {
     background-attachment: fixed;
     background-repeat: no-repeat;
     transition: background-image 0.5s ease-in-out;
-    
-    /* 🔴 强制白天模式也是白字 */
-    color: #ffffff !important; 
+    min-height: 100vh;
+    color: #ffffff !important; /* 强制白字 */
 }
 
-/* 补充：确保白天模式的标题也是白色 (防止被主题默认变量覆盖) */
-h1, h2, h3, h4, h5, h6, .page__title {
-    color: #ffffff !important;
-}
-
-/* 2. 夜间模式背景 (解决问题三：防闪烁背景) */
-/* 🔴 这里的选择器必须包含 html.dark 以配合 Head 里的防闪烁脚本 */
+/* 夜间模式背景图 */
 html.dark body,
 body.dark {
     background-image: url('/images/background-dark.jpg') !important;
 }
 
-/* 3. 侧边栏修正 (解决问题一：名字变小了) */
-.author__avatar {
-    display: none !important;
+/* 确保标题在任何时候都是白色 */
+h1, h2, h3, h4, h5, h6, .page__title {
+    color: #ffffff !important;
 }
 
-/* 🔴 恢复名字的大字体 */
+/* 3. 内容容器 ( 恢复：初始透明，等待 JS 滚动变色) */
+#main-content-wrapper {
+    background-color: rgba(255, 255, 255, 0); /* 初始全透明 */
+    border-radius: 8px;
+    padding: 2em;
+    min-height: 100vh;
+    /* 只保留颜色的过渡，毛玻璃交给 JS 实时计算 */
+    transition: background-color 0.1s linear; 
+}
+
+/* 4. 侧边栏修正 */
+.author__avatar { display: none !important; }
 .author__name {
-    font-size: 1.8em !important; /* 调大这里 */
+    font-size: 1.8em !important;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-/* 4. 布局微调 */
-#main-content-wrapper {
-    background-color: rgba(255, 255, 255, 0);
-    transition: background-color 0.2s ease-out;
-    border-radius: 8px;
-    padding: 2em;
-    min-height: 100vh;
-}
-
+/* 5. 导航栏样式 (保持一致性) */
 .masthead, .masthead__inner-wrap {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
