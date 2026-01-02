@@ -2,22 +2,21 @@
 ---
 /*
  * 这里的逻辑是：
- * 1. 加载原版 Light 主题 (作为默认的基础颜色变量，防止报错)
- * 2. 加载你的 Dark 主题 (作为可选的夜间模式)
- * 3. 加载布局补丁
+ * 1. 显式加载 theme/default_light (亮色基础)
+ * 2. 显式加载 theme/default_dark (夜间模式)
+ * 3. 加载其他核心库
+ * 4. 最后加载 custom (你的补丁)
  */
 
 @import
     "vendor/breakpoint/breakpoint",
     "themes",
     
-    /* 修复点 1：必须加上 append: '_light'，否则找不到文件 */
-    /* 这会去加载 _sass/theme/_default_light.scss，为网站提供基础变量 */
-    "theme/{{ site.site_theme | default: 'default' | append: '_light' }}",
+    /* 1. 必须对应文件: _sass/theme/_default_light.scss */
+    "theme/default_light",
     
-    /* 修复点 2：引入你新建的 _dark.scss */
-    /* 这会去加载 _sass/theme/_dark.scss，用于 JS 切换夜间模式 */
-    "theme/dark", 
+    /* 2. 必须对应文件: _sass/theme/_default_dark.scss */
+    "theme/default_dark", 
 
     "include/mixins",
     "vendor/susy/susy",
@@ -41,6 +40,7 @@
     "vendor/font-awesome/brands",
     "vendor/magnific-popup/magnific-popup",
 
-    /* 3. 引入布局补丁 (Custom Layout Fixes) */
+    /* 3.  必须对应文件: _sass/_custom.scss */
+    /* Jekyll 默认会去 _sass/ 目录下找 _custom.scss，所以直接写 custom */
     "custom"
 ;
