@@ -12,9 +12,9 @@
     {% include browser-upgrade.html %}
     {% include masthead.html %}
 
-    <div id="main-content-wrapper">
+    <div id="main-content-wrapper" style="display: flex; flex-direction: column; min-height: 100vh;">
       
-      <div class="main-content-inner">
+      <div class="main-content-inner" style="flex: 1;">
         {{ content }}
       </div>
     
