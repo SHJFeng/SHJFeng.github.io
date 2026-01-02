@@ -31,15 +31,23 @@
 
 
 .page {
-
   @include breakpoint($large) {
-
+    /* --- 1. 默认情况 (保留给 About Me 使用) --- */
     @include span(10 of 12 last);
-
     @include prefix(0.5 of 12);
-
     @include suffix(2 of 12);
 
+    /* --- 2. 自动化宽屏逻辑 (核心修改) --- */
+    /* 当 body 上有 no-sidebar 标签时，强制执行下面的宽屏样式 */
+    .no-sidebar & {
+      width: 100% !important;      /* 宽度填满 */
+      padding-left: 0 !important;  /* 左侧留白清零 */
+      padding-right: 0 !important; /* 右侧留白清零 */
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      float: none !important;      /* 取消浮动 */
+      max-width: 100% !important;
+    }
   }
 
 
