@@ -1,22 +1,20 @@
 /* ==========================================================================
-   MASTHEAD (Fixed: Single Full-width Bar)
+   MASTHEAD (White Text & No Borders)
    ========================================================================== */
 
 .masthead {
-  /* 1. 外层容器：负责全屏宽度和毛玻璃背景 */
   position: fixed;
   top: 0;
   width: 100%;
   height: $masthead-height;
   z-index: 20;
 
-  /* 2. 核心样式：统一设置白天和黑夜的毛玻璃 */
-  /* 这里设置基础样式，Day Mode 和 Night Mode 都会继承 */
+  /* 背景：半透明白 + 毛玻璃 */
   background: rgba(255, 255, 255, 0.2); 
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 
-  /* 去除外层边框 */
+  /* 保持无边框 */
   border-bottom: none; 
 
   -webkit-animation: intro 0.3s both;
@@ -30,7 +28,7 @@
     padding: 1em;
     font-family: $sans-serif-narrow;
 
-    /* 3. 内层容器：彻底清除所有背景和边框，消除“中间的小方框” */
+    /* 内部容器透明 */
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
@@ -43,8 +41,16 @@
       z-index: 10;
     }
 
+    /* 🔴 要求三：导航栏链接文字改为白色 */
     a {
       text-decoration: none;
+      color: #ffffff !important; /* 强制白色 */
+      font-weight: 700;          /* 加粗一点更好看 */
+    }
+    
+    /* 鼠标悬停变色 (可选，比如变浅蓝) */
+    a:hover {
+      color: #5ab1ff !important;
     }
   }
 }
@@ -62,7 +68,6 @@
   display: block;
   list-style-type: none;
   white-space: nowrap;
-  /* 确保菜单项本身无背景 */
   background-color: transparent !important; 
 
   &--lg {
