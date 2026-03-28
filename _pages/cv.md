@@ -13,7 +13,6 @@ published: false
 Research Interests
 ======
 * Arithmetic Geometry, Homotopical Algebra
-* Particular interest in $p$-adic Hodge theory, $p$-adic cohomologies and recent developments.
 
 Education
 ======
