@@ -6,4 +6,4 @@ author_profile: false
 
 Here is a collection of my expository notes.
 
-* **[Note 1](/files/Note_1.pdf)** *An introduction to Prismatic Cohomology following BMS1*
+* **[Brief note on étale chomology](/files/Note_1.pdf)** *An leisure introduction to grothendieck topology and étale cohomology*
