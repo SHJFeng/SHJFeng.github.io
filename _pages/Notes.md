@@ -1,7 +1,7 @@
 ---
 title: "Expository Notes"
 permalink: /notes/
-author_profile: false
+author_profile: true
 ---
 
 Here is a collection of my expository notes.
