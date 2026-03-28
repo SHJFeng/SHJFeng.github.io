@@ -20,5 +20,5 @@ Here is my [CV](/files/CV.pdf).
 
 # Contact
 
-* **Email (Sorbonne):** [shije[dot]feng[at]etu[dot]sorbonne-universite[dot]fr]<br><small style="display: block; margin-top: -4px; line-height: 1.2; color: gray;">*Note: The spelling "shije" in this email is correct and differs from my name.*</small>
-* **Email (Personal):** [swufengsj[at]foxmail[dot]com]
+* **Email (Sorbonne):** shije[dot]feng[at]etu[dot]sorbonne-universite[dot]fr <br><small style="display: block; margin-top: -4px; line-height: 1.2; color: gray;">*Note: The spelling "shije" in this email is correct and differs from my name.*</small>
+* **Email (Personal):** swufengsj[at]foxmail[dot]com
